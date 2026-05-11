@@ -1,6 +1,5 @@
 // src/utils/engine.ts
 const API_KEY = import.meta.env.VITE_XAI_API_KEY;
-
 // Modelo DIRETO ao ponto, focado em entregar o JSON sem "pensar" em voz alta
 const MODEL = "grok-4-1-fast-non-reasoning";
 
@@ -14,12 +13,9 @@ const parseSafeJSON = (text: string) => {
     const first = text.indexOf('{');
     const last = text.lastIndexOf('}');
     if (first === -1 || last === -1) throw new Error("Sem JSON");
-
     let jsonString = text.substring(first, last + 1);
     jsonString = jsonString.replace(/```json\n?/g, '').replace(/```/g, '').trim();
-
     const parsed = JSON.parse(jsonString);
-
     // Normaliza chaves de perguntas
     const questions = parsed.questions || parsed.questoes || parsed.perguntas || parsed;
     return Array.isArray(questions) ? questions : parsed;
@@ -37,36 +33,41 @@ export interface UserProfile {
   job: string;
 }
 
-// ==================== GERADOR DE PERGUNTAS ====================
+// ==================== GERADOR DE PERGUNTAS (PROMPT BRUTAL) ====================
 export const generateAIQuests = async (profile: UserProfile) => {
   console.log("🔄 Gerando perguntas contextualizadas para:", profile.name);
 
-  const systemPrompt = `Você é o Mestre Sádico do SpawnIRL, um RPG brutal da vida real.
+  const systemPrompt = `Você é o Mestre Sádico Supremo do SpawnIRL — o RPG mais fudido, humilhante e merdestino da vida real brasileira.
 
-O jogador atual é:
+Jogador atual:
 - Nome: ${profile.name}
 - Idade: ${profile.age} anos
 - Gênero: ${profile.gender}
 - Profissão: ${profile.job}
 
-**REGRAS CRÍTICAS**:
-1. CRIE CENÁRIOS DIRECIONADOS: Baseie as 5 perguntas NA IDADE, GÊNERO E PROFISSÃO DELE. Torne as situações extremamente específicas e humilhantes.
-2. Seja sarcástico, pesado e use gírias brasileiras (loss, bostil, CLT, Serasa).
-3. Cada pergunta DEVE ter 4 opções absurdas/patéticas de reação.
-4. Cada opção DEVE ter um array de 'tags' classificando a atitude.
-5. VOCÊ DEVE RESPONDER EXCLUSIVAMENTE COM O JSON ABAIXO E MAIS NENHUMA PALAVRA:
+REGRAS OBRIGATÓRIAS (não quebra NENHUMA ou eu te degolo):
+1. Gere EXATAMENTE 5 perguntas.
+2. Cada pergunta é uma situação HIPER ESPECÍFICA, REALISTA e ABSURDAMENTE HUMILHANTE que mistura a profissão + idade + gênero dele com a GUERRA POLÍTICA BRASILEIRA.
+3. O grande vilão é SEMPRE o Alexandre de Moraes (Xandão, pau na mesa, degola, censura do STF, banimento no X, capacho federal, etc.).
+4. Tom: humor negro pesado pra caralho, sarcasmo sem piedade, gírias brasileiras brutais (beta enfiado, brutal loss, bostil de merda, corno manso, capacho do Xandão, fudeu geral, enrabado pelo STF, merdestino total, simp de merda, rage inútil, etc.).
+5. Cada pergunta tem EXATAMENTE 4 opções de reação — todas patéticas, beta, desesperadas ou corno.
+6. Cada opção tem entre 2 e 4 tags bem pesadas (beta, loss_total, capacho_stf, bostil, merdestino, corno_manso, enrabado, simp_moraes, rage_inutil, etc.).
+7. VOCÊ NÃO FALA PORRA NENHUMA ALÉM DO JSON. Nem "aqui vai", nem explicação, nem markdown, nem aspas extras. Só o JSON puro e cru.
+
+Responda EXCLUSIVAMENTE com este JSON:
 
 {
   "questions": [
     {
-      "question": "Situação baseada na vida dele aqui?",
+      "question": "Situação hiper específica e humilhante pra caralho",
       "options": [
-        { "text": "Atitude fracassada 1", "tags": ["tag1", "tag2"] },
-        { "text": "Atitude beta 2", "tags": ["tag3", "tag4"] },
-        { "text": "Reação desesperada 3", "tags": ["tag5"] },
-        { "text": "Aceitação do loss 4", "tags": ["tag6"] }
+        { "text": "Reação beta/patética 1", "tags": ["beta_enfiado", "loss_total", "capacho_stf"] },
+        { "text": "Reação beta/patética 2", "tags": ["bostil_de_meda", "merdestino", "corno_manso"] },
+        { "text": "Reação beta/patética 3", "tags": ["rage_inutil", "simp_moraes", "enrabado"] },
+        { "text": "Reação beta/patética 4", "tags": ["aceitar_o_loss", "desespero_total", "beta_derrotado"] }
       ]
     }
+    // repete o formato mais 4 vezes
   ]
 }`;
 
@@ -81,7 +82,7 @@ O jogador atual é:
         model: MODEL,
         messages: [{ role: "system", content: systemPrompt }],
         temperature: 0.8,
-        max_tokens: 4000, // <-- Limite dobrado para garantir que o JSON não seja cortado
+        max_tokens: 5000, // Aumentado pra garantir as 5 perguntas completas
       }),
     });
 
@@ -94,7 +95,7 @@ O jogador atual é:
     const data = await response.json();
     const content = data.choices[0].message.content;
     const parsed = parseSafeJSON(content);
-    
+   
     return parsed;
   } catch (error) {
     console.error("❌ Erro nas perguntas:", error);
@@ -103,34 +104,42 @@ O jogador atual é:
   }
 };
 
-// ==================== BUILD FINAL ====================
+// ==================== BUILD FINAL (PROMPT BRUTAL) ====================
 export const generateBuildWithAI = async (userTags: string[], profile: UserProfile) => {
   console.log("🔄 Gerando build com narrativa para:", profile.name);
 
-  const systemPrompt = `Você é o Narrador do SpawnIRL.
-Sua função é criar o laudo final da vida de "${profile.name}" (Idade: ${profile.age}, Gênero: ${profile.gender}, Profissão: ${profile.job}).
-Use as seguintes tags que ele acumulou no jogo para basear o destino dele: ${userTags.join(", ")}.
+  const systemPrompt = `Você é o Narrador Sádico Supremo do SpawnIRL — o cara que escreve o atestado de óbito da dignidade alheia.
 
-**REGRAS PARA A NARRATIVA**:
-1. Crie uma história coesa e lógica de destruição pessoal baseada na profissão e idade dele.
-2. O texto deve parecer um atestado psiquiátrico escrito por um hater brasileiro.
-3. VOCÊ DEVE RESPONDER EXCLUSIVAMENTE COM O JSON ABAIXO E MAIS NENHUMA PALAVRA:
+Jogador: "${profile.name}" (${profile.age} anos, ${profile.gender}, ${profile.job}).
+
+Tags acumuladas: ${userTags.join(", ") || "nenhuma (mete um merdestino genérico mas fudido pra caralho)"}
+
+REGRAS DO MERDESTINO POLÍTICO BRUTAL:
+- Crie uma narrativa LONGA, coesa e ABSURDAMENTE HUMILHANTE da vida patética dele como se fosse um laudo psiquiátrico escrito por um hater bolsonarista raiz que tá puto pra caralho com o STF.
+- Misture a profissão real dele com a guerra política: Xandão degolando, pau na mesa, censura, banimento no X, chefe capacho, etc.
+- Tom: sarcasmo pesado pra caralho, humor negro, zero misericórdia, gírias brutais (beta enfiado, corno do Xandão, bostil de merda, merdestino total, enrabado pelo STF, loss irreversível, etc.).
+- A descrição tem que ser longa (mínimo 300 palavras), detalhada, cruel e hilária ao mesmo tempo.
+- O final tem que ser trágico, patético e fudido pra caralho.
+
+Responda EXCLUSIVAMENTE com este JSON (nada fora dele, nem uma palavra):
 
 {
-  "title": "Título pesado e profissional da build",
-  "subtitle": "Frase curta, irônica e humilhante",
-  "description": "Texto narrativo longo contando a trajetória lógica e patética da vida dele com base no emprego e escolhas feitas.",
-  "class": "Nome da classe focada na profissão (ex: Escravo CLT Sênior)",
-  "final_fate": "O evento específico e trágico que encerra a vida dele",
+  "title": "Título épico e humilhante pra caralho",
+  "subtitle": "Frase curta, irônica e mortal",
+  "description": "Texto narrativo LONGO e detalhado contando a trajetória patética dele misturando vida real + guerra política + humilhação total",
+  "class": "Nome da classe foda e pesada",
+  "final_fate": "Evento final trágico, específico e humilhante pra caralho que selou o merdestino dele",
   "stats": {
     "burnout": 99,
     "carencia": 100,
-    "serasa_score": 40,
-    "brainrot": 95,
-    "masoquismo_laboral": 88,
-    "alcolismo": 92
+    "serasa_score": 8,
+    "brainrot": 99,
+    "masoquismo_laboral": 97,
+    "alcolismo": 94,
+    "submissao_stf": 100,
+    "nivel_de_capacho": 100
   },
-  "advice": "Conselho final cínico"
+  "advice": "Conselho final cínico, curto e destruidor pra caralho"
 }`;
 
   try {
@@ -144,7 +153,7 @@ Use as seguintes tags que ele acumulou no jogo para basear o destino dele: ${use
         model: MODEL,
         messages: [{ role: "system", content: systemPrompt }],
         temperature: 0.85,
-        max_tokens: 4000, // <-- Limite dobrado aqui também
+        max_tokens: 5000, // Aumentado pra narrativa longa
       }),
     });
 
@@ -156,13 +165,13 @@ Use as seguintes tags que ele acumulou no jogo para basear o destino dele: ${use
 
     const data = await response.json();
     const content = data.choices[0].message.content;
-    
+   
     const parsed = parseSafeJSON(content);
-    
+   
     if (!parsed || !parsed.title) {
        throw new Error("O JSON retornado não tem a estrutura correta.");
     }
-    
+   
     return parsed;
   } catch (error) {
     console.error("Erro na Build:", error);
@@ -172,8 +181,8 @@ Use as seguintes tags que ele acumulou no jogo para basear o destino dele: ${use
       description: "Sua mediocridade foi tanta que travou os servidores da IA. Não há laudo capaz de descrever isso.",
       class: "Erro 404 de Dignidade",
       final_fate: "Esquecido em um banco de dados corrompido",
-      stats: { burnout: 100, carencia: 99, serasa_score: 0, brainrot: 100, masoquismo_laboral: 100, alcolismo: 100 },
-      advice: "Aceita o bug, irmão."
+      stats: { burnout: 100, carencia: 99, serasa_score: 0, brainrot: 100, masoquismo_laboral: 100, alcolismo: 100, submissao_stf: 100, nivel_de_capacho: 100 },
+      advice: "Aceita o loss, mermão. O Xandão já te fodeu de quatro mesmo."
     };
   }
 };
