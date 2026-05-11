@@ -18,7 +18,6 @@ const parseSafeJSON = (text: string) => {
 
     const parsed = JSON.parse(jsonString);
 
-    // Normaliza diferentes chaves que o Grok pode retornar nas perguntas
     const questions = parsed.questions || parsed.questoes || parsed.perguntas || parsed;
     return Array.isArray(questions) ? questions : parsed;
   } catch (e) {
@@ -27,28 +26,31 @@ const parseSafeJSON = (text: string) => {
   }
 };
 
-// ==================== GERADOR DE PERGUNTAS ====================
+// ==================== GERADOR DE PERGUNTAS (COERENTE) ====================
 export const generateAIQuests = async (userName: string) => {
-  console.log("🔄 Gerando perguntas para:", userName);
+  console.log("🔄 Gerando perguntas contextualizadas para:", userName);
 
-  const systemPrompt = `Você é o Mestre Sádico do SpawnIRL.
+  // PROMPT ATUALIZADO: Foco em situações cotidianas e coesão
+  const systemPrompt = `Você é o Mestre de RPG do SpawnIRL, um jogo de humor ácido.
 
-Gere **exatamente 5 perguntas** de múltipla escolha extremamente ácidas para "${userName}".
+Sua missão é criar 5 situações cotidianas miseráveis para o jogador "${userName}".
 
-**REGRAS RÍGIDAS** (não quebre):
-- Humor negro pesado, vulgar e humilhante.
-- Responda **APENAS** com este JSON exato, sem nenhuma palavra fora dele:
+**REGRAS PARA A NARRATIVA (CRÍTICO)**:
+1. CRIE CENÁRIOS: Descreva uma situação específica de fracasso no Brasil (ex: encontro do Tinder desastroso, entrevista de emprego CLT 6x1, cobrador de dívida, parente pedindo dinheiro).
+2. AS OPÇÕES DEVEM FAZER SENTIDO: As respostas devem ser reações diretas à situação narrada, mas com atitudes patéticas, covardes ou absurdas.
+3. VARIEDADE: Não repita as mesmas piadas ou memes. Use gírias atuais (loss, gain, Serasa, Tigrinho, beta), mas com inteligência e coerência lógica.
+4. Responda APENAS com o JSON exato abaixo, sem explicações:
 
 {
   "questions": [
     {
       "id": "q1",
-      "question": "Pergunta aqui?",
+      "question": "Você está no ônibus lotado a caminho do seu subemprego e uma idosa pede seu lugar. O que você faz, ${userName}?",
       "options": [
-        { "text": "Opção 1", "tags": ["corno", "virgem"] },
-        { "text": "Opção 2", "tags": ["bostil", "perdedor"] },
-        { "text": "Opção 3", "tags": ["luva de pedreiro", "agiota"] },
-        { "text": "Opção 4", "tags": ["brainrot", "fracassado"] }
+        { "text": "Começa a mancar fingindo ter torcido o pé no Tigrinho.", "tags": ["mentiroso", "loss"] },
+        { "text": "Cede o lugar e chora baixinho pensando na ex.", "tags": ["beta", "carente"] },
+        { "text": "Finge que está dormindo enquanto ouve podcast de coach.", "tags": ["alienado", "bostil"] },
+        { "text": "Levanta e aproveita para fugir do cobrador.", "tags": ["caloteiro", "desespero"] }
       ]
     }
   ]
@@ -64,7 +66,7 @@ Gere **exatamente 5 perguntas** de múltipla escolha extremamente ácidas para "
       body: JSON.stringify({
         model: MODEL,
         messages: [{ role: "system", content: systemPrompt }],
-        temperature: 0.85,
+        temperature: 0.8, // <-- Baixei um pouco para melhorar o nexo lógico
         max_tokens: 1400,
       }),
     });
@@ -73,8 +75,7 @@ Gere **exatamente 5 perguntas** de múltipla escolha extremamente ácidas para "
 
     const data = await response.json();
     const content = data.choices[0].message.content;
-    console.log("Resposta bruta (perguntas):", content);
-
+    
     const parsed = parseSafeJSON(content);
     return parsed;
   } catch (error) {
@@ -84,24 +85,25 @@ Gere **exatamente 5 perguntas** de múltipla escolha extremamente ácidas para "
   }
 };
 
-// ==================== BUILD FINAL ====================
+// ==================== BUILD FINAL (COERENTE) ====================
 export const generateBuildWithAI = async (userTags: string[], userName: string = "seu corno") => {
-  console.log("🔄 Gerando build para:", userName);
+  console.log("🔄 Gerando build com narrativa para:", userName);
 
-  // Injetando o formato exato que o ResultScreen.tsx precisa ler
-  const systemPrompt = `Você é o Narrador Sádico Supremo do SpawnIRL.
-Destrua "${userName}" de forma brutal e engraçada.
+  // PROMPT ATUALIZADO: Foco em criar uma história com começo, meio e fim trágico
+  const systemPrompt = `Você é o Narrador do SpawnIRL.
+Sua função é criar o laudo final da vida de "${userName}" usando as tags: ${userTags.join(", ")}.
 
-**REGRAS RÍGIDAS**:
-- Use humor negro, referências a "loss", "bostil" e subcelebridades.
-- Responda **APENAS** com este JSON exato, sem nenhuma palavra fora dele:
+**REGRAS PARA A NARRATIVA**:
+1. Crie uma história coesa e lógica. Não jogue apenas palavras aleatórias. Explique de forma bem-humorada e sarcástica COMO as escolhas dele o levaram à ruína.
+2. O texto deve parecer um atestado médico psiquiátrico escrito por um hater brasileiro.
+3. Responda APENAS com este JSON:
 
 {
   "title": "Título pesado da build",
-  "subtitle": "Frase curta e humilhante",
-  "description": "Texto narrativo longo, sujo e destruidor contando o fracasso da vida dele",
-  "class": "Nome da classe (ex: Beta Terminal)",
-  "final_fate": "Como ele vai morrer ou terminar",
+  "subtitle": "Frase curta, irônica e humilhante",
+  "description": "Texto narrativo de 2 parágrafos contando a trajetória lógica e patética da vida dele com base nas escolhas feitas.",
+  "class": "Nome da classe (ex: Escravo CLT, Investidor de Pirâmide)",
+  "final_fate": "O evento específico e trágico que encerra a vida dele",
   "stats": {
     "carencia": 99,
     "sofrencia": 100,
@@ -110,7 +112,7 @@ Destrua "${userName}" de forma brutal e engraçada.
     "masoquismo": 88,
     "alcolismo": 92
   },
-  "advice": "Conselho final sarcástico"
+  "advice": "Conselho final cínico"
 }`;
 
   try {
@@ -124,9 +126,9 @@ Destrua "${userName}" de forma brutal e engraçada.
         model: MODEL,
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: `Gere a build final para "${userName}". Utilize estas tags de fracasso como base: ${userTags.join(", ")}` }
+          { role: "user", content: `Escreva o laudo final para "${userName}".` }
         ],
-        temperature: 0.92,
+        temperature: 0.85, // <-- Baixado para focar na história
         max_tokens: 1200,
       }),
     });
@@ -135,11 +137,9 @@ Destrua "${userName}" de forma brutal e engraçada.
 
     const data = await response.json();
     const content = data.choices[0].message.content;
-    console.log("Resposta bruta (build):", content);
-
+    
     const parsed = parseSafeJSON(content);
     
-    // Validação extra: se a IA não retornar o title, disparamos o erro para cair no fallback
     if (!parsed || !parsed.title) {
        throw new Error("O JSON retornado não tem a estrutura correta.");
     }
@@ -148,13 +148,13 @@ Destrua "${userName}" de forma brutal e engraçada.
   } catch (error) {
     console.error("Erro na Build:", error);
     return {
-      title: "Merdestino Absoluto",
-      subtitle: `${userName} nasceu pra ser bostil`,
-      description: "Sua vida é uma tragédia ambulante. A IA nem se deu ao trabalho de calcular o tamanho do seu prejuízo.",
-      class: "Beta Sem Salvação",
-      final_fate: "Morte solitária no quarto alugado",
+      title: "Falha Catastrófica",
+      subtitle: `${userName} quebrou o sistema`,
+      description: "A sua mediocridade foi tanta que travou os servidores da IA. Não há laudo capaz de descrever isso.",
+      class: "Erro 404 de Dignidade",
+      final_fate: "Esquecido em um banco de dados corrompido",
       stats: { carencia: 99, sofrencia: 100, rage: 40, brainrot: 95, masoquismo: 88, alcolismo: 92 },
-      advice: "Aceita o loss, seu corno."
+      advice: "Aceita o bug, irmão."
     };
   }
 };
