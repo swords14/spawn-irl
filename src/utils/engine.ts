@@ -1,56 +1,116 @@
-// Importando os arquivos e dando nomes mais descritivos para o objeto principal
-import classesData from '../data/classes.json';
-import spawnsData from '../data/spawns.json';
-import buffsData from '../data/buffs.json';
-import debuffsData from '../data/debuffs.json';
-import canonEventsData from '../data/canon_events.json';
-import endingsData from '../data/endings.json';
+// src/utils/engine.ts
+const API_KEY = import.meta.env.VITE_XAI_API_KEY;
+const MODEL = "grok-4-1-raciocínio-rápido";
 
-// Função utilitária para calcular o score de um item baseado nas tags do usuário
-const calculateScore = (userTags: string[], itemTags: string[]) => {
-  if (!itemTags || !Array.isArray(itemTags)) return 0;
-  return itemTags.reduce((score, tag) => (userTags.includes(tag) ? score + 1 : score), 0);
+if (!API_KEY) {
+  console.error("❌ VITE_XAI_API_KEY não encontrada no .env");
+}
+
+// ==================== FALLBACK DE PERGUNTAS (caso API falhe) ====================
+const fallbackQuests = [
+  {
+    id: "q1",
+    question: "Qual seu nível de corno atual, seu bostil?",
+    options: [
+      { text: "Sou corno profissional nível Deus", tags: ["corno_feliz", "beta_max"] },
+      { text: "Ainda estou no denial", tags: ["beta", "carente"] },
+      { text: "Eu que traio primeiro", tags: ["rage", "caotico"] },
+      { text: "Sou virgem, nem isso eu consigo", tags: ["patetico", "depressao"] }
+    ]
+  },
+  {
+    id: "q2",
+    question: "Como você reage quando o agiota aparece na porta?",
+    options: [
+      { text: "Peço desculpa e ofereço o cu", tags: ["masoquista", "beta"] },
+      { text: "Grito RECEBA e tomo porrada", tags: ["rage", "caotico"] },
+      { text: "Finjo que não estou em casa", tags: ["patetico", "npc"] },
+      { text: "Pago com Pix e choro depois", tags: ["sofrencia", "perdedor"] }
+    ]
+  }
+  // ... (posso adicionar mais se precisar)
+];
+
+// ==================== 1. GERADOR DE PERGUNTAS DINÂMICAS ====================
+export const generateAIQuests = async (userName: string) => {
+  if (!API_KEY) {
+    console.warn("API Key não encontrada → usando fallback");
+    return fallbackQuests;
+  }
+
+  const systemPrompt = `Gere 5 perguntas ácidas e engraçadas para ${userName}. Responda apenas com JSON válido.`;
+
+  try {
+    const response = await fetch("https://api.x.ai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [{ role: "system", content: systemPrompt }],
+        response_format: { type: "json_object" },
+        temperature: 0.85,
+        max_tokens: 800,
+      }),
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
+    const content = data.choices[0]?.message?.content;
+
+    if (!content) throw new Error("Resposta vazia");
+
+    const parsed = JSON.parse(content);
+    return parsed.questions || parsed;
+  } catch (error) {
+    console.error("API falhou, usando perguntas de fallback:", error);
+    return fallbackQuests;
+  }
 };
 
-// Função para pegar um item aleatório com peso (weighted random)
-const getBestMatch = (userTags: string[], dataArray: any[]) => {
-  // Trava de segurança: se não vier um array, retorna nulo para não quebrar a tela
-  if (!dataArray || !Array.isArray(dataArray)) return null;
+// ==================== 2. GERADOR DA BUILD FINAL ====================
+export const generateBuildWithAI = async (userTags: string[], userName: string = "seu corno") => {
+  // (mantive sua versão anterior aqui - está boa)
+  const systemPrompt = `Você é o Narrador Sádico Supremo do SpawnIRL. Destrua o usuário sem piedade.`;
 
-  const scoredItems = dataArray.map(item => {
-    // Procura pelas tags na propriedade "tags" ou "tags_required" (como está no seu JSON)
-    const itemTags = item.tags || item.tags_required || [];
-    // Calcula o score base + um fator de aleatoriedade para não ser sempre igual
-    const score = calculateScore(userTags, itemTags) + Math.random();
-    return { ...item, score };
-  });
+  const userPrompt = `Destrua "${userName}" com as tags: ${userTags.join(", ")}. Retorne apenas JSON.`;
 
-  // Ordena pelo score e pega o melhor
-  return scoredItems.sort((a, b) => b.score - a.score)[0];
-};
+  try {
+    const response = await fetch("https://api.x.ai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.95,
+        max_tokens: 1000,
+      }),
+    });
 
-export const generateBuild = (userTags: string[]) => {
-  // Agora estamos passando a propriedade interna que contém o array de fato
-  const characterClass = getBestMatch(userTags, classesData.classes);
-  const spawn = getBestMatch(userTags, spawnsData.spawns);
-  const buff = getBestMatch(userTags, buffsData.buffs);
-  const debuff = getBestMatch(userTags, debuffsData.debuffs);
-  // Pelo seu print, a chave do array dentro de canon_events.json se chama "events"
-  const canonEvent = getBestMatch(userTags, canonEventsData.events); 
-  const ending = getBestMatch(userTags, endingsData.endings);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-  return {
-    characterClass,
-    spawn,
-    buff,
-    debuff,
-    canonEvent,
-    ending,
-    stats: {
-      aura: Math.floor(Math.random() * 10000) - 5000, // Pode ser negativa
-      sanidade: Math.floor(Math.random() * 100),
-      sorte: Math.floor(Math.random() * 100),
-      shape: Math.floor(Math.random() * 100)
-    }
-  };
+    const data = await response.json();
+    return JSON.parse(data.choices[0].message.content);
+  } catch (error) {
+    console.error("Erro na Build:", error);
+    return {
+      title: "Merdestino Absoluto",
+      subtitle: `${userName} nasceu pra ser bostil`,
+      description: "A API morreu, mas seu merdestino continua intacto.",
+      class: "Beta Sem Salvação",
+      final_fate: "Morte solitária no quarto alugado",
+      stats: { carencia: 99, sofrencia: 100, rage: 40, brainrot: 95, masoquismo: 88, alcolismo: 92 },
+      advice: "Aceita o loss, seu corno."
+    };
+  }
 };
