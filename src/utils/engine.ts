@@ -18,7 +18,7 @@ const parseSafeJSON = (text: string) => {
 
     const parsed = JSON.parse(jsonString);
 
-    // Normaliza diferentes chaves que o Grok pode retornar
+    // Normaliza diferentes chaves que o Grok pode retornar nas perguntas
     const questions = parsed.questions || parsed.questoes || parsed.perguntas || parsed;
     return Array.isArray(questions) ? questions : parsed;
   } catch (e) {
@@ -88,9 +88,30 @@ Gere **exatamente 5 perguntas** de múltipla escolha extremamente ácidas para "
 export const generateBuildWithAI = async (userTags: string[], userName: string = "seu corno") => {
   console.log("🔄 Gerando build para:", userName);
 
+  // Injetando o formato exato que o ResultScreen.tsx precisa ler
   const systemPrompt = `Você é o Narrador Sádico Supremo do SpawnIRL.
 Destrua "${userName}" de forma brutal e engraçada.
-Responda **APENAS** com JSON válido.`;
+
+**REGRAS RÍGIDAS**:
+- Use humor negro, referências a "loss", "bostil" e subcelebridades.
+- Responda **APENAS** com este JSON exato, sem nenhuma palavra fora dele:
+
+{
+  "title": "Título pesado da build",
+  "subtitle": "Frase curta e humilhante",
+  "description": "Texto narrativo longo, sujo e destruidor contando o fracasso da vida dele",
+  "class": "Nome da classe (ex: Beta Terminal)",
+  "final_fate": "Como ele vai morrer ou terminar",
+  "stats": {
+    "carencia": 99,
+    "sofrencia": 100,
+    "rage": 40,
+    "brainrot": 95,
+    "masoquismo": 88,
+    "alcolismo": 92
+  },
+  "advice": "Conselho final sarcástico"
+}`;
 
   try {
     const response = await fetch("https://api.x.ai/v1/chat/completions", {
@@ -103,7 +124,7 @@ Responda **APENAS** com JSON válido.`;
         model: MODEL,
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: `Destrua "${userName}" com as tags: ${userTags.join(", ")}` }
+          { role: "user", content: `Gere a build final para "${userName}". Utilize estas tags de fracasso como base: ${userTags.join(", ")}` }
         ],
         temperature: 0.92,
         max_tokens: 1200,
@@ -117,13 +138,19 @@ Responda **APENAS** com JSON válido.`;
     console.log("Resposta bruta (build):", content);
 
     const parsed = parseSafeJSON(content);
+    
+    // Validação extra: se a IA não retornar o title, disparamos o erro para cair no fallback
+    if (!parsed || !parsed.title) {
+       throw new Error("O JSON retornado não tem a estrutura correta.");
+    }
+    
     return parsed;
   } catch (error) {
     console.error("Erro na Build:", error);
     return {
       title: "Merdestino Absoluto",
       subtitle: `${userName} nasceu pra ser bostil`,
-      description: "Sua vida é uma tragédia ambulante.",
+      description: "Sua vida é uma tragédia ambulante. A IA nem se deu ao trabalho de calcular o tamanho do seu prejuízo.",
       class: "Beta Sem Salvação",
       final_fate: "Morte solitária no quarto alugado",
       stats: { carencia: 99, sofrencia: 100, rage: 40, brainrot: 95, masoquismo: 88, alcolismo: 92 },
