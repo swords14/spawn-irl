@@ -1,12 +1,40 @@
 {
   "events": [
     {
-      "name": "Você virou meme no Twitter",
-      "description": "Virou famoso como 'o corno que assumiu o filho do Neymar'. Ganhou 12 seguidores e depressão profunda."
+      "name": "Você virou meme nacional",
+      "description": "Virou famoso como 'o corno que assumiu o filho do Neymar e ainda pagou pensão'. Ganhou 47 seguidores no TikTok e depressão profunda terminal."
     },
     {
-      "name": "Overdose com estilo",
-      "description": "Morreu com o celular na mão aberto no stories da ex. Última mensagem: 'tô bem'."
+      "name": "Overdose com Estilo",
+      "description": "Morreu engasgado com cachaça + Rivotril, celular na mão aberto nos stories da ex gozando com outro. Última mensagem enviada: 'tô bem kkk'."
+    },
+    {
+      "name": "Agiota te Achou",
+      "description": "Eles te pegaram no beco, quebraram seu braço e dente. Você ainda pediu desculpa por atrasar o pagamento."
+    },
+    {
+      "name": "Ex Casou com o Neymar",
+      "description": "Você viu o stories da ex grávida de outro. Tomou 8 latões de cachaça em seguida e acordou com vontade de morrer."
+    },
+    {
+      "name": "Cancelamento Vitalício",
+      "description": "Falou merda no Flow, virou meme eterno, perdeu emprego, família e dignidade. Agora vive de react de Tigresa VIP."
+    },
+    {
+      "name": "Você Virou a Vadia da Cela",
+      "description": "Na cadeia, virou a puta oficial no primeiro dia. Todo mundo te conhece como 'Tigresa VIP da Penitenciária'."
+    },
+    {
+      "name": "Morte por Ghosting",
+      "description": "Mandou 47 áudios pra ex chorando. Ela deixou no visto. Você bateu punheta, chorou e tomou 12 comprimidos."
+    },
+    {
+      "name": "Luva de Pedreiro IRL",
+      "description": "Começou a gritar 'RECEBA!' no meio da rua, sem camisa, cheirando a bunda. Virou viral e ainda assim continua pobre."
+    },
+    {
+      "name": "Corpo Encontrado Depois de 3 Meses",
+      "description": "Morreu sozinho. Vizinhos só perceberam pelo cheiro forte. Polícia achou seu corpo cheio de larva e barata."
     }
   ]
 }

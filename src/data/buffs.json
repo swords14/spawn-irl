@@ -1,16 +1,36 @@
 {
   "buffs": [
     {
-      "name": "+1000 de Carência",
-      "effect": "Você ama tanto que aceita ser corno, pagar pensão e ainda pedir pra voltar."
+      "name": "+1000 de Carência Terminal",
+      "effect": "Você ama tanto que aceita ser corno, assume o filho do outro, paga pensão e ainda implora pra ex voltar te usando."
     },
     {
-      "name": "Resistência a Realidade",
-      "effect": "Você consegue fingir que tá bem mesmo devendo 200 mil e sendo largado."
+      "name": "Resistência a Realidade Absurda",
+      "effect": "Você consegue fingir que tá bem mesmo devendo 300 mil, sendo largado, corno e dormindo no sofá da mãe."
     },
     {
-      "name": "RECEBA!",
-      "effect": "Você grita RECEBA enquanto leva porrada da vida e ainda acha engraçado."
+      "name": "RECEBA! Mode Ativado",
+      "effect": "Você grita 'RECEBA!' enquanto a vida te fode sem vaselina, leva porrada e ainda acha graça na própria desgraça."
+    },
+    {
+      "name": "Corno Feliz Crônico",
+      "effect": "Você ganha +500% de tolerância a ser traído. Ainda agradece a ex e vota no Lula por carência."
+    },
+    {
+      "name": "Masoquismo Avançado",
+      "effect": "Você sente prazer em ser humilhado, traído, quebrado pelo agiota e virar a vadia da cela."
+    },
+    {
+      "name": "Negação Profissional",
+      "effect": "Você consegue dizer 'tô bem' mesmo com depressão, ressaca eterna e zero perspectiva de vida."
+    },
+    {
+      "name": "Sobrevivência de Mendigo",
+      "effect": "Você sobrevive com R$4,20 por dia, lasanha estragada e cachaça de litrão sem morrer (por enquanto)."
+    },
+    {
+      "name": "Punição Divina",
+      "effect": "Deus te abandonou, mas você ainda grita RECEBA achando que isso é algum tipo de teste."
     }
   ]
 }

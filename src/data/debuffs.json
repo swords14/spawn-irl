@@ -1,24 +1,40 @@
 {
   "debuffs": [
     {
-      "name": "Depressão Crônica",
-      "effect": "-90% de vontade de viver. +300% de consumo de cachaça e remédio."
+      "name": "Depressão Crônica Terminal",
+      "effect": "-95% vontade de viver. +500% consumo de cachaça, Rivotril e vontade de pular do viaduto todo dia."
     },
     {
-      "name": "Corno Terminal",
-      "effect": "Sua ex sempre vai estar mamando alguém melhor. Você ainda vai assumir o filho."
+      "name": "Corno Terminal Irreversível",
+      "effect": "Sua ex vai estar sempre mamando alguém melhor. Você vai assumir o filho, pagar pensão e ainda agradecer de joelhos."
     },
     {
-      "name": "Pobreza Extrema",
-      "effect": "Você vai dever no rotativo até morrer. Agiota te conhece pelo nome."
+      "name": "Pobreza Extrema Sem Salvação",
+      "effect": "Você vai dever 300 mil no rotativo, agiota vai quebrar seus dentes e você ainda vai pedir dinheiro pro Luva de Pedreiro."
     },
     {
-      "name": "Cérebro de Bluezao",
-      "effect": "Você só consegue pensar em meme, pornô e gritar no meio da rua."
+      "name": "Cérebro de Bluezao Destruído",
+      "effect": "Você só consegue gritar, fazer live chorando, cheirar a bunda e pensar em pornô e meme o dia inteiro."
     },
     {
-      "name": "Morte Solitária",
-      "effect": "Você vai apodrecer no quarto por 2 meses até o cheiro incomodar o vizinho."
+      "name": "Morte Solitária e Humilhante",
+      "effect": "Você vai morrer sozinho no quarto, corpo inchado e podre, sendo comido por rato e barata por 3 meses até o fedor incomodar o vizinho."
+    },
+    {
+      "name": "Virgindade Crônica",
+      "effect": "Você vai continuar virgem até os 50 anos, batendo punheta chorando com foto da ex e morrendo sem nunca ter comido ninguém."
+    },
+    {
+      "name": "Ressaca Eterna",
+      "effect": "Acorda todo dia com ressaca do caralho, vomitando sangue e tomando remédio pra tentar continuar vivo."
+    },
+    {
+      "name": "Cancelamento Vitalício",
+      "effect": "Você fala merda todo dia, leva cancelamento, vira meme e ainda perde emprego, namorada e dignidade restante."
+    },
+    {
+      "name": "Cu Destruído",
+      "effect": "Você leva no cu da vida, da ex, da polícia e da cadeia. E ainda geme 'ai que delícia'."
     }
   ]
 }

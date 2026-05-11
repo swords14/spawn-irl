@@ -1,29 +1,44 @@
 {
   "classes": [
     {
-      "name": "Luva de Pedreiro Falido",
-      "description": "Você grita RECEBA enquanto a vida te fode sem vaselina todo dia.",
-      "tags_required": ["rage", "perdedor"]
+      "name": "Luva de Pedreiro Terminal",
+      "description": "Você grita 'RECEBA!' enquanto a vida te fode sem vaselina, sem piedade e sem parar. Mendigo, corno e depressivo full time.",
+      "tags_required": ["rage", "perdedor", "realidade_br"]
     },
     {
-      "name": "Corno Profissional Nível Hard",
-      "description": "Você assume filho, paga pensão e ainda agradece a ex por te usar.",
-      "tags_required": ["corno_feliz", "beta_max"]
+      "name": "Corno Profissional Nível Deus",
+      "description": "Você assume filho alheio, paga pensão, limpa a casa e ainda agradece a ex por ter te usado como trouxa. Corno feliz oficial.",
+      "tags_required": ["corno_feliz", "beta_max", "carente"]
     },
     {
-      "name": "Depressivo Terminal com Cachaça",
-      "description": "Sua terapia é Rivotril + litrão + Monark às 4h da manhã.",
-      "tags_required": ["depressao", "alcoholic"]
+      "name": "Depressivo Alcoólatra Terminal",
+      "description": "Sua vida é Rivotril de manhã, cachaça de tarde, Monark de noite e vontade de morrer 24h por dia.",
+      "tags_required": ["depressao", "alcoholic", "sofrencia"]
     },
     {
-      "name": "Bluezao 2.0",
-      "description": "Você passa fome, grita no meio da rua e vive de live no TikTok.",
-      "tags_required": ["rage", "brainrot"]
+      "name": "Bluezao 3000",
+      "description": "Você passa fome, grita no meio da rua, cheira a bunda, faz live chorando e ainda acha que vai viralizar.",
+      "tags_required": ["rage", "brainrot", "perdedor_nato"]
     },
     {
       "name": "Tigresa VIP da Penitenciária",
-      "description": "Você virou a puta da cela e ainda achou que era delícia.",
-      "tags_required": ["masoquista", "esquisito"]
+      "description": "Você virou a vadia oficial da cela, toma rola de todo mundo e ainda geme 'ai que delícia' enquanto apanha.",
+      "tags_required": ["masoquista", "esquisito", "preso_fodido"]
+    },
+    {
+      "name": "Mendigo do Pix",
+      "description": "Devendo 200 mil, agiota te quebrando todo dia, morando na rua e pedindo dinheiro pro Luva de Pedreiro.",
+      "tags_required": ["perdedor", "humilhado", "realidade_br"]
+    },
+    {
+      "name": "Virgem Depressivo Crônico",
+      "description": "Ainda virgem aos 45 anos, bate punheta chorando com foto da ex e sonha em morrer dormindo.",
+      "tags_required": ["carente", "patetico", "depressao"]
+    },
+    {
+      "name": "Cancelado Eterno",
+      "description": "Você é sócio do Monark, fala merda todo dia, leva cancelamento e ainda bebe pra esquecer que sua vida acabou.",
+      "tags_required": ["esquisito", "caotico", "brainrot"]
     }
   ]
 }

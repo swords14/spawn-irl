@@ -2,63 +2,69 @@
   "spawns": [
     {
       "location": "Complexo do Alemão - RJ",
-      "difficulty": "HARDCORE BATTLE ROYALE",
-      "effect": "PvP ativado 24h. Tiro, facada e corno o tempo todo.",
+      "difficulty": "HARDCORE BATTLE ROYALE FODA-SE",
+      "effect": "PvP 24h. Tiro, facada, roubo e corno o tempo inteiro. Você já nasce devendo pro agiota.",
       "tags": ["rage", "caotico", "sobrevivente", "preso_fodido"]
     },
     {
       "location": "Faria Lima - SP",
       "difficulty": "PAY TO WIN INFERNAL",
-      "effect": "Cada respiração custa R$ 340. Se não tiver dinheiro, você vira mendigo instantaneamente.",
+      "effect": "Cada respiração custa R$ 487. Se não tiver dinheiro vira mendigo na hora e ainda te humilham no Instagram.",
       "tags": ["beta", "humilhado", "realidade_br"]
     },
     {
       "location": "Manaus - AM",
       "difficulty": "LENDÁRIO DO INFERNO",
-      "effect": "Seu PC derreteu, sua casa alagou e você tá com malária + depressão.",
+      "effect": "Casa alagada, PC derretido, malária, dengue e depressão profunda. Só tem cachaça de litrão pra curar.",
       "tags": ["sobrevivente", "depressao", "alcoholic"]
     },
     {
       "location": "Curitiba - PR",
-      "difficulty": "FROST PUNK + DEPRESSÃO",
-      "effect": "Carisma zerado. Todo mundo acha você um nojento e você sente frio na alma 24h.",
+      "difficulty": "FROST PUNK + DEPRESSÃO TERMINAL",
+      "effect": "Carisma zerado. Todo mundo acha você um nojento fedorento e você sente frio existencial 24h por dia.",
       "tags": ["beta", "esquisito", "sofrencia"]
     },
     {
       "location": "Interior do Acre",
       "difficulty": "FORA DO MAPA TOTAL",
-      "effect": "Você nasceu numa creepypasta. Sem internet, sem futuro, só cachaça e pensamento suicida.",
+      "effect": "Sem internet, sem futuro, só cachaça, pensamento suicida e barata voando na cara.",
       "tags": ["caotico", "depressao", "perdedor_nato"]
     },
     {
       "location": "Rocinha - RJ",
-      "difficulty": "HELL MODE",
-      "effect": "Você spawnou já devendo pro agiota, corno e com o cu dolorido.",
+      "difficulty": "HELL MODE EXTREMO",
+      "effect": "Você spawnou já devendo pro agiota, corno, com o cu dolorido e levando porrada da vida.",
       "tags": ["preso_fodido", "corno_feliz", "rage"]
     },
     {
       "location": "Brasília - DF",
       "difficulty": "POLÍTICO CORRUPTO",
-      "effect": "Você vira político instantaneamente. Rouba, mente e ainda toma facada nas costas.",
+      "effect": "Você vira político instantaneamente: rouba, mente, trai e ainda leva facada nas costas do próprio partido.",
       "tags": ["caotico", "esquisito", "morcego"]
     },
     {
-      "location": "São Paulo - Centro",
-      "difficulty": "CRACKOLÂNDIA",
-      "effect": "Você acorda viciado em crack, sem dente e dormindo na calçada.",
+      "location": "Cracolândia - SP",
+      "difficulty": "CRACK MODE",
+      "effect": "Você acorda viciado em crack, sem dente, dormindo na calçada e cheirando a bunda e mijo.",
       "tags": ["depressao", "alcoholic", "brainrot"]
     },
     {
-      "location": "Sua Ex's Casa",
-      "difficulty": "CORNO MODE",
-      "effect": "Você spawnou assistindo ela sendo arrombada pelo novo namorado.",
+      "location": "Casa da Sua Ex",
+      "difficulty": "CORNO MODE HARD",
+      "effect": "Você spawnou assistindo ela sendo arrombada pelo novo namorado enquanto você bate punheta chorando atrás da porta.",
       "tags": ["carente", "patetico", "masoquista"]
     },
     {
-      "location": "Cadeia de Bangu",
+      "location": "Cadeia de Bangu 1",
       "difficulty": "PRISÃO ETERNA",
-      "effect": "Você já spawnou como a vadia da cela. Boa sorte.",
+      "effect": "Você já spawnou como a vadia oficial da cela. Todo mundo te conhece como Tigresa VIP da Penitenciária.",
       "tags": ["preso_fodido", "masoquista", "perdedor_nato"]
+    },
+    {
+      "location": "Sua Casa Alugada",
+      "difficulty": "VIDA REAL BRASILEIRA",
+      "effect": "Internet lenta, conta atrasada, ex te traindo e depressão de graça inclusa.",
+      "tags": ["beta", "sofrencia", "realista_amargo"]
     }
   ]
 }

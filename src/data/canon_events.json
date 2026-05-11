@@ -2,13 +2,43 @@
   "events": [
     {
       "name": "A ex casou com outro",
-      "description": "Você viu no Instagram e tomou 8 latões de cachaça em seguida.",
-      "effect": "Ganha debuff Corno Terminal"
+      "description": "Você viu no Instagram ela de vestido branco grávida do novo namorado. Tomou 12 latões de cachaça e acordou vomitando sangue.",
+      "effect": "Ganha debuff Corno Terminal + Carência Crônica"
     },
     {
       "name": "Agiota na porta",
-      "description": "Eles quebraram seu braço. Você ainda pediu desculpa por atrasar.",
-      "effect": "Ganha debuff Pobreza Extrema"
+      "description": "Eles chutaram sua porta, quebraram seu braço e dente. Você ainda pediu desculpa por atrasar e ofereceu o cu pra pagar a dívida.",
+      "effect": "Ganha debuff Pobreza Extrema + Cu Destruído"
+    },
+    {
+      "name": "Ghosting da Ex",
+      "description": "Mandou 43 áudios chorando às 4h da manhã. Ela deixou tudo no visto e postou story com o novo cara.",
+      "effect": "Ganha debuff Depressão Terminal + Virgindade Crônica"
+    },
+    {
+      "name": "Cancelamento no Flow",
+      "description": "Você tentou imitar o Monark, falou merda e virou meme nacional. Perdeu emprego, amigos e o pouco de dignidade que tinha.",
+      "effect": "Ganha debuff Cancelamento Vitalício + Brainrot Avançado"
+    },
+    {
+      "name": "Ressaca Eterna",
+      "description": "Acordou com a pior ressaca da vida, vomitando sangue e prometendo nunca mais beber. Às 18h já estava abrindo outro litrão.",
+      "effect": "Ganha debuff Ressaca Eterna + Alcoólatra Irreversível"
+    },
+    {
+      "name": "Você virou a Vadia da Cela",
+      "description": "Na primeira noite na cadeia já virou a puta oficial. Todo mundo te chama de Tigresa VIP agora.",
+      "effect": "Ganha debuff Masoquista Terminal + Preso Fodido"
+    },
+    {
+      "name": "Conta de Luz Cortada",
+      "description": "Ficou sem luz, sem internet e sem dignidade. Teve que ver live do Bluezao no 4G caro do vizinho.",
+      "effect": "Ganha debuff Mendigo + Sofrência Máxima"
+    },
+    {
+      "name": "Overdose Quase Fatal",
+      "description": "Misturou cachaça com 14 comprimidos de Rivotril. Acordou no hospital e já pediu alta pra continuar bebendo.",
+      "effect": "Ganha debuff Overdose Pronto + Depressão Crônica"
     }
   ]
 }
