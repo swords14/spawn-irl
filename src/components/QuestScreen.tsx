@@ -3,72 +3,35 @@ import { useStore } from '../store/useStore';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function QuestScreen() {
-  const [currentQuestIdx, setCurrentQuestIdx] = useState(0);
+  const [idx, setIdx] = useState(0);
   const { dynamicQuests, addTags, setStep } = useStore();
-
-  const currentQuest = dynamicQuests[currentQuestIdx];
+  const current = dynamicQuests[idx];
 
   const handleAnswer = (tags: string[]) => {
     addTags(tags);
-    
-    if (currentQuestIdx < dynamicQuests.length - 1) {
-      setCurrentQuestIdx(prev => prev + 1);
-    } else {
-      setStep('result');
-    }
+    if (idx < dynamicQuests.length - 1) setIdx(idx + 1);
+    else setStep('result');
   };
 
-  if (!currentQuest) {
-    return (
-      <div className="flex items-center justify-center min-h-screen text-white">
-        Carregando perguntas... (se travar, recarregue a página)
-      </div>
-    );
+  if (!current || !current.options) {
+    return <div className="text-white text-center p-20">Recuperando dados do Serasa...</div>;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[85vh] w-full max-w-2xl mx-auto px-4">
-      {/* Progress Bar */}
-      <div className="w-full mb-10 flex gap-1">
-        {dynamicQuests.map((_, idx) => (
-          <div 
-            key={idx} 
-            className={`h-1 flex-1 rounded transition-all duration-700 ${
-              idx <= currentQuestIdx 
-                ? 'bg-neon-blue shadow-[0_0_12px_#0ff]' 
-                : 'bg-white/10'
-            }`}
-          />
-        ))}
-      </div>
-
+    <div className="max-w-2xl mx-auto py-20 px-4">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={currentQuestIdx}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          className="w-full text-center"
-        >
-          <h2 className="text-2xl md:text-3xl font-black mb-12 text-white leading-tight tracking-tight">
-            {currentQuest.question}
+        <motion.div key={idx} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+          <h2 className="text-3xl font-black mb-10 text-center italic text-white leading-tight">
+            "{current.question}"
           </h2>
-
-          <div className="grid grid-cols-1 gap-4">
-            {currentQuest.options.map((opt: any, idx: number) => (
-              <button
-                key={idx}
+          <div className="grid gap-4">
+            {current.options.map((opt: any, i: number) => (
+              <button 
+                key={i} 
                 onClick={() => handleAnswer(opt.tags)}
-                className="glass-panel p-6 text-left border border-white/10 hover:border-neon-blue hover:bg-white/10 group transition-all active:scale-[0.98] text-left"
+                className="glass-panel p-6 text-left hover:border-neon-blue bg-white/5 transition-all active:scale-95 text-white"
               >
-                <div className="flex items-start gap-4">
-                  <span className="text-neon-blue font-mono font-bold text-xl opacity-40 group-hover:opacity-100 mt-0.5">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-base md:text-lg font-medium text-gray-200 group-hover:text-white leading-relaxed">
-                    {opt.text}
-                  </span>
-                </div>
+                <span className="text-neon-blue font-mono mr-4">[{i+1}]</span> {opt.text}
               </button>
             ))}
           </div>
