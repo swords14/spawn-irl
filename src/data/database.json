@@ -1,0 +1,54 @@
+{
+  "classes": [
+    {
+      "id": "mendigo_brutal",
+      "name": "Mendigo Brutal",
+      "subtitle": "Não sobrou nada pro beta.",
+      "base_salary_30": 0,
+      "survival_rate": "12%",
+      "description": "Você perdeu tudo no Tigrinho. O loss foi gigantesco. Agora você mora debaixo da ponte e seu único amigo é um cachorro chamado Caramelo.",
+      "requirements": ["beta", "iludido", "loss", "npc"]
+    },
+    {
+      "id": "clt_premium",
+      "name": "CLT Premium",
+      "subtitle": "O famoso escravo gourmet.",
+      "base_salary_30": 4500,
+      "survival_rate": "85%",
+      "description": "Você tem VR de 800 reais e gympass. Acha que venceu na vida, mas chora no banho todo domingo à noite.",
+      "requirements": ["preguicoso", "ansioso", "tryhard"]
+    },
+    {
+      "id": "dev_on_fire",
+      "name": "Dev Arquiteto (Solo Leveling)",
+      "subtitle": "Sistema no ar, sanidade no chão.",
+      "base_salary_30": 18400,
+      "survival_rate": "50%",
+      "description": "Você cria sistemas do zero. Você é uma máquina. O problema é que agora sua coluna parece um ponto de interrogação.",
+      "requirements": ["dev", "morcego", "hustler"]
+    },
+    {
+      "id": "agiota_esportivo",
+      "name": "Agiota Esportivo",
+      "subtitle": "O perigo tem nome.",
+      "base_salary_30": 35000,
+      "survival_rate": "5%",
+      "description": "Começou apostando troco de pão, hoje empresta dinheiro pra quem perdeu tudo. Anda de Hilux, mas tem medo de ligar o carro.",
+      "requirements": ["caotico", "hustler", "psicopata"]
+    }
+  ],
+  "spawns": [
+    { "location": "Fortaleza - CE", "difficulty": "HARD", "effect": "+50% de Resiliência Térmica. O sol é para cada um." },
+    { "location": "Rio de Janeiro - RJ", "difficulty": "NIGHTMARE", "effect": "Chance de lootear ou ser looteado a qualquer momento." },
+    { "location": "Curitiba - PR", "difficulty": "NORMAL", "effect": "-10 de Carisma. Mas o frio de lá..." },
+    { "location": "Florianópolis - SC", "difficulty": "EASY", "effect": "Aura clean, trânsito impossível." }
+  ],
+  "buffs": [
+    { "name": "Aura +10000", "tags": ["caotico", "social"] },
+    { "name": "Imunidade a Café", "tags": ["dev", "tryhard"] }
+  ],
+  "debuffs": [
+    { "name": "Calvície Agressiva", "tags": ["ansioso", "gamer"] },
+    { "name": "Joelho de Paçoca", "tags": ["preguicoso", "morcego"] }
+  ]
+}
