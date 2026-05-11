@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "name": "A ex casou com outro",
+      "description": "Você viu no Instagram e tomou 8 latões de cachaça em seguida.",
+      "effect": "Ganha debuff Corno Terminal"
+    },
+    {
+      "name": "Agiota na porta",
+      "description": "Eles quebraram seu braço. Você ainda pediu desculpa por atrasar.",
+      "effect": "Ganha debuff Pobreza Extrema"
+    }
+  ]
+}

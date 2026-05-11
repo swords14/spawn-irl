@@ -1,0 +1,64 @@
+{
+  "spawns": [
+    {
+      "location": "Complexo do Alemão - RJ",
+      "difficulty": "HARDCORE BATTLE ROYALE",
+      "effect": "PvP ativado 24h. Tiro, facada e corno o tempo todo.",
+      "tags": ["rage", "caotico", "sobrevivente", "preso_fodido"]
+    },
+    {
+      "location": "Faria Lima - SP",
+      "difficulty": "PAY TO WIN INFERNAL",
+      "effect": "Cada respiração custa R$ 340. Se não tiver dinheiro, você vira mendigo instantaneamente.",
+      "tags": ["beta", "humilhado", "realidade_br"]
+    },
+    {
+      "location": "Manaus - AM",
+      "difficulty": "LENDÁRIO DO INFERNO",
+      "effect": "Seu PC derreteu, sua casa alagou e você tá com malária + depressão.",
+      "tags": ["sobrevivente", "depressao", "alcoholic"]
+    },
+    {
+      "location": "Curitiba - PR",
+      "difficulty": "FROST PUNK + DEPRESSÃO",
+      "effect": "Carisma zerado. Todo mundo acha você um nojento e você sente frio na alma 24h.",
+      "tags": ["beta", "esquisito", "sofrencia"]
+    },
+    {
+      "location": "Interior do Acre",
+      "difficulty": "FORA DO MAPA TOTAL",
+      "effect": "Você nasceu numa creepypasta. Sem internet, sem futuro, só cachaça e pensamento suicida.",
+      "tags": ["caotico", "depressao", "perdedor_nato"]
+    },
+    {
+      "location": "Rocinha - RJ",
+      "difficulty": "HELL MODE",
+      "effect": "Você spawnou já devendo pro agiota, corno e com o cu dolorido.",
+      "tags": ["preso_fodido", "corno_feliz", "rage"]
+    },
+    {
+      "location": "Brasília - DF",
+      "difficulty": "POLÍTICO CORRUPTO",
+      "effect": "Você vira político instantaneamente. Rouba, mente e ainda toma facada nas costas.",
+      "tags": ["caotico", "esquisito", "morcego"]
+    },
+    {
+      "location": "São Paulo - Centro",
+      "difficulty": "CRACKOLÂNDIA",
+      "effect": "Você acorda viciado em crack, sem dente e dormindo na calçada.",
+      "tags": ["depressao", "alcoholic", "brainrot"]
+    },
+    {
+      "location": "Sua Ex's Casa",
+      "difficulty": "CORNO MODE",
+      "effect": "Você spawnou assistindo ela sendo arrombada pelo novo namorado.",
+      "tags": ["carente", "patetico", "masoquista"]
+    },
+    {
+      "location": "Cadeia de Bangu",
+      "difficulty": "PRISÃO ETERNA",
+      "effect": "Você já spawnou como a vadia da cela. Boa sorte.",
+      "tags": ["preso_fodido", "masoquista", "perdedor_nato"]
+    }
+  ]
+}

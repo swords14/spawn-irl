@@ -1,0 +1,24 @@
+{
+  "debuffs": [
+    {
+      "name": "Depressão Crônica",
+      "effect": "-90% de vontade de viver. +300% de consumo de cachaça e remédio."
+    },
+    {
+      "name": "Corno Terminal",
+      "effect": "Sua ex sempre vai estar mamando alguém melhor. Você ainda vai assumir o filho."
+    },
+    {
+      "name": "Pobreza Extrema",
+      "effect": "Você vai dever no rotativo até morrer. Agiota te conhece pelo nome."
+    },
+    {
+      "name": "Cérebro de Bluezao",
+      "effect": "Você só consegue pensar em meme, pornô e gritar no meio da rua."
+    },
+    {
+      "name": "Morte Solitária",
+      "effect": "Você vai apodrecer no quarto por 2 meses até o cheiro incomodar o vizinho."
+    }
+  ]
+}

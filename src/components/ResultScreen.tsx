@@ -50,10 +50,15 @@ export function ResultScreen() {
   // Define a cor baseada na dificuldade
   const getDifficultyColor = (diff: string) => {
     switch(diff) {
-      case 'NIGHTMARE': return 'text-neon-red';
+      case 'NIGHTMARE':
+      case 'BATTLE ROYALE': 
+      case 'DARK SOULS':
+      case 'APOCALIPSE': return 'text-neon-red';
       case 'HARD': return 'text-orange-500';
       case 'NORMAL': return 'text-yellow-400';
-      case 'EASY': return 'text-neon-blue';
+      case 'EASY': 
+      case 'PAY TO WIN': return 'text-neon-blue';
+      case 'LENDÁRIO': return 'text-neon-purple';
       default: return 'text-white';
     }
   };
@@ -73,44 +78,69 @@ export function ResultScreen() {
         <h2 className="text-3xl font-black mb-1 uppercase tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
           {userName} BUILD
         </h2>
-        <p className="text-neon-green font-mono text-sm mb-6">&gt; STATUS: CONCLUÍDO</p>
+        <p className="text-neon-green font-mono text-sm mb-4">&gt; STATUS: CONCLUÍDO</p>
 
-        <div className="space-y-4">
+        {/* STATS BARS */}
+        <div className="grid grid-cols-4 gap-2 mb-4">
+          <div className="bg-black/60 p-2 rounded text-center border border-white/5">
+            <p className="text-[10px] text-gray-400 font-mono">AURA</p>
+            <p className={`font-bold ${build.stats.aura < 0 ? 'text-neon-red' : 'text-neon-blue'}`}>{build.stats.aura}</p>
+          </div>
+          <div className="bg-black/60 p-2 rounded text-center border border-white/5">
+            <p className="text-[10px] text-gray-400 font-mono">SANIDADE</p>
+            <p className="font-bold text-neon-purple">{build.stats.sanidade}</p>
+          </div>
+          <div className="bg-black/60 p-2 rounded text-center border border-white/5">
+            <p className="text-[10px] text-gray-400 font-mono">SORTE</p>
+            <p className="font-bold text-green-400">{build.stats.sorte}</p>
+          </div>
+          <div className="bg-black/60 p-2 rounded text-center border border-white/5">
+            <p className="text-[10px] text-gray-400 font-mono">SHAPE</p>
+            <p className="font-bold text-orange-400">{build.stats.shape}</p>
+          </div>
+        </div>
+
+        <div className="space-y-3">
           <div className="bg-black/40 p-3 rounded border border-white/5">
             <p className="text-xs text-gray-400 font-mono mb-1">📍 SPAWN</p>
-            <p className="font-bold">{build.spawn.location}</p>
-            <p className={`text-xs font-bold mt-1 ${getDifficultyColor(build.spawn.difficulty)}`}>
-              DIFICULDADE: {build.spawn.difficulty}
+            <p className="font-bold text-sm">{build.spawn?.location}</p>
+            <p className={`text-xs font-bold mt-1 ${getDifficultyColor(build.spawn?.difficulty)}`}>
+              DIFICULDADE: {build.spawn?.difficulty}
             </p>
           </div>
 
           <div className="bg-black/40 p-3 rounded border border-white/5">
             <p className="text-xs text-gray-400 font-mono mb-1">🧠 CLASSE</p>
-            <p className="text-xl font-bold text-neon-blue">{build.characterClass.name}</p>
-            <p className="text-sm italic text-gray-300 mt-1">"{build.characterClass.subtitle}"</p>
-            <p className="text-xs mt-2 text-gray-400">{build.characterClass.description}</p>
+            <p className="text-lg font-bold text-neon-blue">{build.characterClass?.name}</p>
+            <p className="text-xs italic text-gray-300 mt-1">"{build.characterClass?.subtitle}"</p>
+            <p className="text-xs mt-2 text-gray-400">{build.characterClass?.description}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-black/40 p-3 rounded border border-white/5">
-              <p className="text-xs text-gray-400 font-mono mb-1">💰 SALÁRIO (30 ANOS)</p>
-              <p className="font-bold text-green-400">R$ {build.characterClass.base_salary_30}</p>
+            <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-neon-green">
+              <p className="text-xs text-gray-400 font-mono mb-1">🔥 BUFF</p>
+              <p className="font-bold text-xs">{build.buff?.name}</p>
             </div>
-            <div className="bg-black/40 p-3 rounded border border-white/5">
-              <p className="text-xs text-gray-400 font-mono mb-1">📈 CHANCE DE SURVIVAL</p>
-              <p className="font-bold">{build.characterClass.survival_rate}</p>
+            <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-neon-red">
+              <p className="text-xs text-gray-400 font-mono mb-1">⚠ DEBUFF</p>
+              <p className="font-bold text-xs">{build.debuff?.name}</p>
             </div>
           </div>
 
-          <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-neon-green">
-            <p className="text-xs text-gray-400 font-mono mb-1">🔥 BUFF</p>
-            <p className="font-bold text-sm">{build.buff.name}</p>
-          </div>
+          {/* NOVOS BLOCOS: EVENTO CANÔNICO E DESTINO FINAL */}
+          {build.canonEvent && (
+            <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-neon-purple">
+              <p className="text-xs text-gray-400 font-mono mb-1">💀 EVENTO CANÔNICO</p>
+              <p className="font-bold text-xs italic">"{build.canonEvent.event}"</p>
+            </div>
+          )}
 
-          <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-neon-red">
-            <p className="text-xs text-gray-400 font-mono mb-1">⚠ DEBUFF</p>
-            <p className="font-bold text-sm">{build.debuff.name}</p>
-          </div>
+          {build.ending && (
+            <div className="bg-black/40 p-3 rounded border border-white/5 border-l-2 border-l-white">
+              <p className="text-xs text-gray-400 font-mono mb-1">⚰ DESTINO FINAL</p>
+              <p className="font-bold text-xs text-gray-300">{build.ending.description}</p>
+            </div>
+          )}
         </div>
       </div>
 

@@ -1,0 +1,180 @@
+{
+  "questions": [
+    {
+      "id": "quero_prisao",
+      "question": "Você é o protagonista e foi preso exatamente nas cenas 32:29 e 35:26. Qual sua reação real, seu Luva de Pedreiro filho da puta sem dignidade?",
+      "options": [
+        {
+          "text": "Revidava na hora, levava surra de 20 presos, virava a vadia da cela no primeiro dia, tomava rola de todo mundo e ainda gritava 'RECEBA!' enquanto gozava de dor e humilhação.",
+          "tags": ["rage", "caotico", "preso_fodido"]
+        },
+        {
+          "text": "Gritava chorando pela mamãe até o PM me dar porrada, cuspir na cara, enfiar o cassetete e me dar Rivotril na veia.",
+          "tags": ["ansioso", "fraco", "depressao"]
+        },
+        {
+          "text": "Ficava em choque olhando pro chão aceitando que minha vida sempre foi mais fudida que o cu destruído do Bluezao depois de 3 bailes seguidos.",
+          "tags": ["beta", "npc", "perdedor_nato"]
+        },
+        {
+          "text": "“Aí que delícia… finalmente vou ser a Tigresa VIP da Penitenciária, vou virar a puta da galera.”",
+          "tags": ["esquisito", "brainrot", "masoquista"]
+        }
+      ]
+    },
+    {
+      "id": "didi_quer_ser_crianca",
+      "question": "No final de Didi Quer Ser Criança a menina vira adulta no corpo mas continua com mente de criança. Didi vai embora com ela. Se você fosse o Didi (ou Monark cheirado de coca), o que faria?",
+      "options": [
+        {
+          "text": "Ia embora com ela, montava creche clandestina no porão, chamava Lula pra inaugurar, Neymar pra batizar e Monark pra dar aula de como não ser pego.",
+          "tags": ["caotico", "esquisito", "preso_futuro"]
+        },
+        {
+          "text": "Isso é crime pra porra. Denunciava, tomava caixa inteira de Rivotril, postava no X e depois tentava me suicidar por ser tão careta.",
+          "tags": ["social", "careta", "depressao"]
+        },
+        {
+          "text": "Que porra de filme a Globo passou? Isso explica por que minha geração inteira é depressiva, alcoólatra, viciada e quer morrer todo dia.",
+          "tags": ["brainrot", "caotico", "realista_amargo"]
+        },
+        {
+          "text": "Didi era o P. Diddy brasileiro raiz: festa com Neymar, Monark, menores e muita coisa pesada.",
+          "tags": ["esquisito", "caotico", "morcego"]
+        }
+      ]
+    },
+    {
+      "id": "onde_esta_sua_ex",
+      "question": "Fala a real, seu corno filho da puta sem colhão: onde tá sua ex agora?",
+      "options": [
+        {
+          "text": "Mamando um cara idêntico ao Neymar enquanto eu tomo cachaça barata + lorazepam + bato punheta chorando vendo os stories dela gozando.",
+          "tags": ["rage", "caotico", "amargurado"]
+        },
+        {
+          "text": "Não faço ideia e prefiro continuar fingindo que tô bem igual Bolsonaro falando que vai voltar e todo mundo acredita.",
+          "tags": ["beta", "frio", "alcoholic"]
+        },
+        {
+          "text": "Que saudades… ainda cheiro a calcinha suja dela, bato punheta com Monark ao fundo e choro até dormir.",
+          "tags": ["carente", "patetico", "sofrencia"]
+        },
+        {
+          "text": "Eu assumia o filho dela com outro, pagava pensão, limpava a casa e ainda votava no Lula por carência terminal.",
+          "tags": ["carente", "beta_max", "corno_feliz"]
+        }
+      ]
+    },
+    {
+      "id": "dinheiro",
+      "question": "Qual vai ser sua situação financeira em 5 anos, seu mendigo inútil?",
+      "options": [
+        {
+          "text": "Devendo 120 mil no rotativo, agiota quebrando seu braço, morando na rua e pedindo dinheiro pro Luva de Pedreiro no Pix.",
+          "tags": ["perdedor", "sofrencia", "realidade_br"]
+        },
+        {
+          "text": "Vivendo de 400 reais do Bolsa Família + bico de Uber com carro roubado que não liga e zero dignidade restante.",
+          "tags": ["beta", "humilhado", "depressao"]
+        },
+        {
+          "text": "Fazendo react de Tigresa VIP pelada e Bluezao brigando, ganhando R$4,20 por mês pra comprar pão mofado e cachaça.",
+          "tags": ["brainrot", "caotico", "famoso_fracassado"]
+        },
+        {
+          "text": "Sócio do Monark no Flow (depressão crônica, cancelamento diário e bebida gratis até morrer).",
+          "tags": ["esquisito", "caotico", "preso_futuro"]
+        }
+      ]
+    },
+    {
+      "id": "aparencia",
+      "question": "Como você vai estar fisicamente daqui 10 anos, seu nojento fedorento?",
+      "options": [
+        {
+          "text": "Careca brilhando, barrigão de chope, dente podre preto, cheirando a mijo, bosta e cachaça azeda igual Bluezao em coma.",
+          "tags": ["depressao", "realista_amargo", "perdedor"]
+        },
+        {
+          "text": "Gordo pra caralho, com 7 queixas de assédio, pele oleosa e cara de Monark depois de 10 anos sem tomar banho.",
+          "tags": ["beta", "esquisito", "humilhado"]
+        },
+        {
+          "text": "Magro esqueleto, olheira roxa, pele cinza, tomando Rivotril + energético + chorando sangue todo dia.",
+          "tags": ["sofrencia", "brainrot", "caotico"]
+        },
+        {
+          "text": "Parecendo o Luva de Pedreiro depois de levar porrada da vida, da ex, da polícia e de Deus.",
+          "tags": ["rage", "masoquista", "brainrot"]
+        }
+      ]
+    },
+    {
+      "id": "morte",
+      "question": "Como você vai morrer, seu merda completo?",
+      "options": [
+        {
+          "text": "Overdose de cachaça + 15 comprimidos misturados assistindo live do Bluezao enquanto todo mundo ri no velório.",
+          "tags": ["depressao", "alcoholic", "caotico"]
+        },
+        {
+          "text": "Morto sozinho no quarto alugado, corpo inchado e sendo comido por rato e barata por 6 semanas até o cheiro chegar na rua.",
+          "tags": ["beta", "sofrencia", "patetico"]
+        },
+        {
+          "text": "Levando tiro na cara durante assalto indo comprar cigarro com o último real do auxílio.",
+          "tags": ["rage", "realidade_br", "perdedor_nato"]
+        },
+        {
+          "text": "Suicídio pendurado no teto depois de ver a ex casada feliz com Neymar, grávida, e eu ainda virgem aos 48 anos.",
+          "tags": ["carente", "masoquista", "depressao"]
+        }
+      ]
+    },
+    {
+      "id": "final_de_semana",
+      "question": "Sexta 18h. Qual seu final de semana dos sonhos, seu lixo humano sem futuro?",
+      "options": [
+        {
+          "text": "Beber até vomitar sangue, acordar com ressaca do inferno, tomar remédio e ver a Tigresa VIP sendo arrombada no OnlyFans.",
+          "tags": ["caotico", "depressivo", "alcoholic"]
+        },
+        {
+          "text": "Tentar voltar com a ex, levar ghosting, mandar áudio de 20 minutos chorando e bater 7 punhetas seguidas.",
+          "tags": ["carente", "patetico", "sofrencia"]
+        },
+        {
+          "text": "Maratonar 150 vídeos do Luva de Pedreiro sem tomar banho, comendo lasanha estragada e cheirando a bunda.",
+          "tags": ["brainrot", "npc", "nostalgico_fracassado"]
+        },
+        {
+          "text": "Ir pra festa, acordar sendo processado por estupro e votar no Bolsonaro enquanto chora de ódio.",
+          "tags": ["esquisito", "rage", "preso_futuro"]
+        }
+      ]
+    },
+    {
+      "id": "saude_mental",
+      "question": "Qual seu estado mental real, seu depressivo terminal sem salvação?",
+      "options": [
+        {
+          "text": "Tomo 12 remédios por dia e ainda acordo querendo pular do viaduto do Bluezao, cortar os pulsos ou enfiar uma faca no pescoço.",
+          "tags": ["depressao", "caotico", "alcoholic"]
+        },
+        {
+          "text": "Fico 'bem' até lembrar que votei em Lula ou Bolsonaro e continuo sendo um fracasso ambulante.",
+          "tags": ["rage", "beta", "realista_amargo"]
+        },
+        {
+          "text": "Minha terapia é cachaça, Monark, pornô pesado, chorar no chão do banheiro e rezar pra morrer dormindo.",
+          "tags": ["brainrot", "sofrencia", "depressivo"]
+        },
+        {
+          "text": "Tô ótimo! Gritando RECEBA enquanto a vida me fode sem camisinha, sem vaselina e sem piedade.",
+          "tags": ["esquisito", "caotico", "masoquista"]
+        }
+      ]
+    }
+  ]
+}

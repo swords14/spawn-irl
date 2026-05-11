@@ -1,0 +1,24 @@
+{
+  "endings": [
+    {
+      "title": "Morte de Corno Anônimo",
+      "description": "Você morreu sozinho, virgem aos 47 anos, enquanto sua ex postava foto de lua de mel com o Neymar. Ninguém foi no seu enterro.",
+      "rarity": "legendary"
+    },
+    {
+      "title": "Luva de Pedreiro Eterno",
+      "description": "Você virou mendigo gritando RECEBA na frente do McDonald's. Ganhou 3 seguidores no TikTok antes de morrer de overdose.",
+      "rarity": "common"
+    },
+    {
+      "title": "O Rei dos Corno",
+      "description": "Você pagou pensão de 3 filhos que não eram seus, ainda votou no Lula e morreu feliz assistindo Monark.",
+      "rarity": "epic"
+    },
+    {
+      "title": "Suicídio com Estilo",
+      "description": "Você se pendurou no teto com a calcinha da ex na cabeça. A polícia achou engraçado.",
+      "rarity": "rare"
+    }
+  ]
+}
