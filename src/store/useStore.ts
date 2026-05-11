@@ -1,25 +1,42 @@
 import { create } from 'zustand';
 
+type AppState = 'start' | 'quests' | 'result';
+
 interface GameState {
   userName: string;
-  currentStep: 'start' | 'quests' | 'result';
+  userAge: string;
+  userGender: string;
+  userJob: string;
   userTags: string[];
   dynamicQuests: any[];
-  setUserName: (name: string) => void;
-  setStep: (step: 'start' | 'quests' | 'result') => void;
+  currentStep: AppState;
+  
+  setProfile: (name: string, age: string, gender: string, job: string) => void;
   addTags: (tags: string[]) => void;
   setDynamicQuests: (quests: any[]) => void;
+  setStep: (step: AppState) => void;
   reset: () => void;
 }
 
 export const useStore = create<GameState>((set) => ({
   userName: '',
-  currentStep: 'start',
+  userAge: '',
+  userGender: '',
+  userJob: '',
   userTags: [],
   dynamicQuests: [],
-  setUserName: (name) => set({ userName: name }),
-  setStep: (step) => set({ currentStep: step }),
-  addTags: (tags) => set((state) => ({ userTags: [...state.userTags, ...tags] })),
+  currentStep: 'start',
+
+  setProfile: (name, age, gender, job) => set({ 
+    userName: name, userAge: age, userGender: gender, userJob: job 
+  }),
+  addTags: (tags) => set((state) => ({ 
+    userTags: [...state.userTags, ...tags] 
+  })),
   setDynamicQuests: (quests) => set({ dynamicQuests: quests }),
-  reset: () => set({ userName: '', currentStep: 'start', userTags: [], dynamicQuests: [] }),
+  setStep: (step) => set({ currentStep: step }),
+  reset: () => set({ 
+    userName: '', userAge: '', userGender: '', userJob: '', 
+    userTags: [], dynamicQuests: [], currentStep: 'start' 
+  }),
 }));

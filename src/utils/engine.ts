@@ -1,6 +1,8 @@
 // src/utils/engine.ts
 const API_KEY = import.meta.env.VITE_XAI_API_KEY;
-const MODEL = "grok-4.3";
+
+// Modelo DIRETO ao ponto, focado em entregar o JSON sem "pensar" em voz alta
+const MODEL = "grok-4-1-fast-non-reasoning";
 
 if (!API_KEY) {
   console.error("❌ VITE_XAI_API_KEY não encontrada no .env");
@@ -14,43 +16,55 @@ const parseSafeJSON = (text: string) => {
     if (first === -1 || last === -1) throw new Error("Sem JSON");
 
     let jsonString = text.substring(first, last + 1);
-    jsonString = jsonString.replace(/```json|```/g, '').trim();
+    jsonString = jsonString.replace(/```json\n?/g, '').replace(/```/g, '').trim();
 
     const parsed = JSON.parse(jsonString);
 
+    // Normaliza chaves de perguntas
     const questions = parsed.questions || parsed.questoes || parsed.perguntas || parsed;
     return Array.isArray(questions) ? questions : parsed;
   } catch (e) {
-    console.error("❌ Parse falhou:", text);
+    console.error("❌ Parse falhou. Conteúdo recebido:", text);
     return null;
   }
 };
 
-// ==================== GERADOR DE PERGUNTAS (COERENTE) ====================
-export const generateAIQuests = async (userName: string) => {
-  console.log("🔄 Gerando perguntas contextualizadas para:", userName);
+// Definindo a interface para o perfil do usuário
+export interface UserProfile {
+  name: string;
+  age: string;
+  gender: string;
+  job: string;
+}
 
-  // PROMPT ATUALIZADO: Foco em situações cotidianas e coesão
-  const systemPrompt = `Você é o Mestre de RPG do SpawnIRL, um jogo de humor ácido.
+// ==================== GERADOR DE PERGUNTAS ====================
+export const generateAIQuests = async (profile: UserProfile) => {
+  console.log("🔄 Gerando perguntas contextualizadas para:", profile.name);
 
-Sua missão é criar 5 situações cotidianas miseráveis para o jogador "${userName}".
+  const systemPrompt = `Você é o Mestre Sádico do SpawnIRL, um RPG brutal da vida real.
 
-**REGRAS PARA A NARRATIVA (CRÍTICO)**:
-1. CRIE CENÁRIOS: Descreva uma situação específica de fracasso no Brasil (ex: encontro do Tinder desastroso, entrevista de emprego CLT 6x1, cobrador de dívida, parente pedindo dinheiro).
-2. AS OPÇÕES DEVEM FAZER SENTIDO: As respostas devem ser reações diretas à situação narrada, mas com atitudes patéticas, covardes ou absurdas.
-3. VARIEDADE: Não repita as mesmas piadas ou memes. Use gírias atuais (loss, gain, Serasa, Tigrinho, beta), mas com inteligência e coerência lógica.
-4. Responda APENAS com o JSON exato abaixo, sem explicações:
+O jogador atual é:
+- Nome: ${profile.name}
+- Idade: ${profile.age} anos
+- Gênero: ${profile.gender}
+- Profissão: ${profile.job}
+
+**REGRAS CRÍTICAS**:
+1. CRIE CENÁRIOS DIRECIONADOS: Baseie as 5 perguntas NA IDADE, GÊNERO E PROFISSÃO DELE. Torne as situações extremamente específicas e humilhantes.
+2. Seja sarcástico, pesado e use gírias brasileiras (loss, bostil, CLT, Serasa).
+3. Cada pergunta DEVE ter 4 opções absurdas/patéticas de reação.
+4. Cada opção DEVE ter um array de 'tags' classificando a atitude.
+5. VOCÊ DEVE RESPONDER EXCLUSIVAMENTE COM O JSON ABAIXO E MAIS NENHUMA PALAVRA:
 
 {
   "questions": [
     {
-      "id": "q1",
-      "question": "Você está no ônibus lotado a caminho do seu subemprego e uma idosa pede seu lugar. O que você faz, ${userName}?",
+      "question": "Situação baseada na vida dele aqui?",
       "options": [
-        { "text": "Começa a mancar fingindo ter torcido o pé no Tigrinho.", "tags": ["mentiroso", "loss"] },
-        { "text": "Cede o lugar e chora baixinho pensando na ex.", "tags": ["beta", "carente"] },
-        { "text": "Finge que está dormindo enquanto ouve podcast de coach.", "tags": ["alienado", "bostil"] },
-        { "text": "Levanta e aproveita para fugir do cobrador.", "tags": ["caloteiro", "desespero"] }
+        { "text": "Atitude fracassada 1", "tags": ["tag1", "tag2"] },
+        { "text": "Atitude beta 2", "tags": ["tag3", "tag4"] },
+        { "text": "Reação desesperada 3", "tags": ["tag5"] },
+        { "text": "Aceitação do loss 4", "tags": ["tag6"] }
       ]
     }
   ]
@@ -66,17 +80,21 @@ Sua missão é criar 5 situações cotidianas miseráveis para o jogador "${user
       body: JSON.stringify({
         model: MODEL,
         messages: [{ role: "system", content: systemPrompt }],
-        temperature: 0.8, // <-- Baixei um pouco para melhorar o nexo lógico
-        max_tokens: 1400,
+        temperature: 0.8,
+        max_tokens: 4000, // <-- Limite dobrado para garantir que o JSON não seja cortado
       }),
     });
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) {
+      const errBody = await response.json();
+      console.error("🚨 Erro detalhado da xAI (Quests):", errBody);
+      throw new Error(`HTTP ${response.status}`);
+    }
 
     const data = await response.json();
     const content = data.choices[0].message.content;
-    
     const parsed = parseSafeJSON(content);
+    
     return parsed;
   } catch (error) {
     console.error("❌ Erro nas perguntas:", error);
@@ -85,31 +103,31 @@ Sua missão é criar 5 situações cotidianas miseráveis para o jogador "${user
   }
 };
 
-// ==================== BUILD FINAL (COERENTE) ====================
-export const generateBuildWithAI = async (userTags: string[], userName: string = "seu corno") => {
-  console.log("🔄 Gerando build com narrativa para:", userName);
+// ==================== BUILD FINAL ====================
+export const generateBuildWithAI = async (userTags: string[], profile: UserProfile) => {
+  console.log("🔄 Gerando build com narrativa para:", profile.name);
 
-  // PROMPT ATUALIZADO: Foco em criar uma história com começo, meio e fim trágico
   const systemPrompt = `Você é o Narrador do SpawnIRL.
-Sua função é criar o laudo final da vida de "${userName}" usando as tags: ${userTags.join(", ")}.
+Sua função é criar o laudo final da vida de "${profile.name}" (Idade: ${profile.age}, Gênero: ${profile.gender}, Profissão: ${profile.job}).
+Use as seguintes tags que ele acumulou no jogo para basear o destino dele: ${userTags.join(", ")}.
 
 **REGRAS PARA A NARRATIVA**:
-1. Crie uma história coesa e lógica. Não jogue apenas palavras aleatórias. Explique de forma bem-humorada e sarcástica COMO as escolhas dele o levaram à ruína.
-2. O texto deve parecer um atestado médico psiquiátrico escrito por um hater brasileiro.
-3. Responda APENAS com este JSON:
+1. Crie uma história coesa e lógica de destruição pessoal baseada na profissão e idade dele.
+2. O texto deve parecer um atestado psiquiátrico escrito por um hater brasileiro.
+3. VOCÊ DEVE RESPONDER EXCLUSIVAMENTE COM O JSON ABAIXO E MAIS NENHUMA PALAVRA:
 
 {
-  "title": "Título pesado da build",
+  "title": "Título pesado e profissional da build",
   "subtitle": "Frase curta, irônica e humilhante",
-  "description": "Texto narrativo de 2 parágrafos contando a trajetória lógica e patética da vida dele com base nas escolhas feitas.",
-  "class": "Nome da classe (ex: Escravo CLT, Investidor de Pirâmide)",
+  "description": "Texto narrativo longo contando a trajetória lógica e patética da vida dele com base no emprego e escolhas feitas.",
+  "class": "Nome da classe focada na profissão (ex: Escravo CLT Sênior)",
   "final_fate": "O evento específico e trágico que encerra a vida dele",
   "stats": {
-    "carencia": 99,
-    "sofrencia": 100,
-    "rage": 40,
+    "burnout": 99,
+    "carencia": 100,
+    "serasa_score": 40,
     "brainrot": 95,
-    "masoquismo": 88,
+    "masoquismo_laboral": 88,
     "alcolismo": 92
   },
   "advice": "Conselho final cínico"
@@ -124,16 +142,17 @@ Sua função é criar o laudo final da vida de "${userName}" usando as tags: ${u
       },
       body: JSON.stringify({
         model: MODEL,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: `Escreva o laudo final para "${userName}".` }
-        ],
-        temperature: 0.85, // <-- Baixado para focar na história
-        max_tokens: 1200,
+        messages: [{ role: "system", content: systemPrompt }],
+        temperature: 0.85,
+        max_tokens: 4000, // <-- Limite dobrado aqui também
       }),
     });
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) {
+      const errBody = await response.json();
+      console.error("🚨 Erro detalhado da xAI (Build):", errBody);
+      throw new Error(`HTTP ${response.status}`);
+    }
 
     const data = await response.json();
     const content = data.choices[0].message.content;
@@ -149,11 +168,11 @@ Sua função é criar o laudo final da vida de "${userName}" usando as tags: ${u
     console.error("Erro na Build:", error);
     return {
       title: "Falha Catastrófica",
-      subtitle: `${userName} quebrou o sistema`,
-      description: "A sua mediocridade foi tanta que travou os servidores da IA. Não há laudo capaz de descrever isso.",
+      subtitle: `${profile.name} quebrou o sistema`,
+      description: "Sua mediocridade foi tanta que travou os servidores da IA. Não há laudo capaz de descrever isso.",
       class: "Erro 404 de Dignidade",
       final_fate: "Esquecido em um banco de dados corrompido",
-      stats: { carencia: 99, sofrencia: 100, rage: 40, brainrot: 95, masoquismo: 88, alcolismo: 92 },
+      stats: { burnout: 100, carencia: 99, serasa_score: 0, brainrot: 100, masoquismo_laboral: 100, alcolismo: 100 },
       advice: "Aceita o bug, irmão."
     };
   }
