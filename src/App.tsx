@@ -1,7 +1,7 @@
 import { useStore } from './store/useStore';
 import { StartScreen } from './components/StartScreen';
 import { QuestScreen } from './components/QuestScreen';
-// import { ResultScreen } from './components/ResultScreen'; // Vamos criar essa a seguir
+import { ResultScreen } from './components/ResultScreen'; // <-- Nova importação!
 
 function App() {
   const currentStep = useStore((state) => state.currentStep);
@@ -11,11 +11,7 @@ function App() {
       <main className="container mx-auto">
         {currentStep === 'start' && <StartScreen />}
         {currentStep === 'quests' && <QuestScreen />}
-        {currentStep === 'result' && (
-          <div className="flex items-center justify-center min-h-[80vh] text-2xl font-mono text-neon-green animate-pulse">
-            &gt; GERANDO_BUILD... {/* Placeholder para a próxima etapa */}
-          </div>
-        )}
+        {currentStep === 'result' && <ResultScreen />} {/* <-- Chamando a tela aqui */}
       </main>
     </div>
   );
