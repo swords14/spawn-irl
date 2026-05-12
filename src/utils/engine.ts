@@ -8,11 +8,15 @@ if (!API_KEY) {
   console.error("❌ VITE_XAI_API_KEY não encontrada no .env");
 }
 
+// Atualizado com os novos campos da StartScreen
 export interface UserProfile {
   name: string;
   age: string;
   gender: string;
   job: string;
+  city: string;
+  maritalStatus: string;
+  salaryLevel: string;
 }
 
 // ==================== PARSE ROBUSTO ====================

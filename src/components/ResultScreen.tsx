@@ -1,70 +1,135 @@
-import { useEffect, useState } from 'react';
+// src/components/ResultScreen.tsx
+import { useEffect, useState, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { generateBuildWithAI } from '../utils/engine';
 import { LoadingScreen } from './LoadingScreen';
 import { motion } from 'framer-motion';
+import html2canvas from 'html2canvas';
 
 export function ResultScreen() {
-  // 1. Puxando todos os dados do novo perfil do Zustand
-  const { userName, userAge, userGender, userJob, userTags, reset } = useStore();
+  // 1. Puxando TODAS as variáveis novas do Zustand
+  const { 
+    userName, userAge, userGender, userJob, 
+    userCity, userMarital, userSalary, 
+    userTags, reset 
+  } = useStore();
+  
   const [build, setBuild] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 2. Montando o objeto que a engine atualizada exige
+    // 2. Montando o objeto EXATAMENTE como a interface UserProfile exige
     const userProfile = { 
       name: userName, 
       age: userAge, 
       gender: userGender, 
-      job: userJob 
+      job: userJob,
+      city: userCity,
+      maritalStatus: userMarital,
+      salaryLevel: userSalary
     };
 
-    // 3. Passando as tags e o perfil completo
+    // 3. Enviando o perfil completo para a API
     generateBuildWithAI(userTags, userProfile).then(data => {
       setBuild(data);
       setLoading(false);
     });
-  }, [userName, userAge, userGender, userJob, userTags]);
+  }, [userName, userAge, userGender, userJob, userCity, userMarital, userSalary, userTags]);
+
+  const handleDownload = async () => {
+    if (cardRef.current) {
+      const canvas = await html2canvas(cardRef.current, { 
+        backgroundColor: '#0a0a0a',
+        scale: 2 
+      });
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `MERDESTINO_${userName.toUpperCase()}.png`;
+      link.click();
+    }
+  };
 
   if (loading) return <LoadingScreen message="Calculando seu prejuízo..." />;
 
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center py-10 px-4">
-      <div className="glass-panel w-full max-w-lg p-8 border-t-4 border-neon-red bg-black/90">
-        
-        <h2 className="text-4xl font-black uppercase text-neon-red italic mb-1">{build.title}</h2>
-        {/* Renderizando o subtítulo que a engine gera */}
-        <p className="text-gray-500 font-mono text-xs uppercase mb-6 tracking-widest">{build.subtitle}</p>
+  if (!build) {
+    return <div className="text-white text-center mt-20">Erro ao gerar build. Recarregue a página.</div>;
+  }
 
-        <div className="grid grid-cols-2 gap-4 my-6">
-          {Object.entries(build.stats || {}).map(([k, v]: any) => (
-            <div key={k} className="bg-white/5 p-2 rounded border border-white/5">
-              <p className="text-[10px] text-gray-500 uppercase">{k}</p>
-              <p className="font-bold text-neon-red">{v}%</p>
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="flex flex-col items-center justify-center min-h-screen py-10 px-4"
+    >
+      <div ref={cardRef} className="glass-panel w-full max-w-lg p-8 relative overflow-hidden border-t-4 border-neon-red bg-black/90 shadow-[0_0_50px_rgba(255,0,0,0.15)]">
+        
+        <div className="flex justify-between items-start mb-6">
+          <div>
+            <h2 className="text-4xl font-black uppercase italic text-neon-red tracking-tighter leading-none">
+              {build.title}
+            </h2>
+            <p className="text-gray-500 font-mono text-xs mt-2 tracking-widest uppercase">
+              {build.subtitle}
+            </p>
+          </div>
+        </div>
+
+        {/* STATS */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {Object.entries(build.stats || {}).map(([key, value]: any) => (
+            <div key={key} className="space-y-1">
+              <div className="flex justify-between text-xs font-mono uppercase text-gray-500">
+                <span>{key.replace(/_/g, ' ').toUpperCase()}</span>
+                <span>{value}%</span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${value}%` }}
+                  className="h-full bg-neon-red shadow-[0_0_10px_red]"
+                />
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="space-y-4">
-          <p className="text-xl font-black text-white italic uppercase">{build.class}</p>
-          <p className="text-gray-400 text-sm border-y border-white/5 py-4 italic">"{build.description}"</p>
-          
-          {/* Adicionando o destino final para completar o laudo */}
-          <div className="bg-black/50 p-4 rounded border-l-2 border-white/10">
-            <p className="text-[10px] text-gray-500 font-mono uppercase mb-1">Destino Final:</p>
-            <p className="text-sm font-bold text-gray-300">{build.final_fate}</p>
+        <div className="space-y-6">
+          <div className="bg-neon-red/5 p-5 rounded border border-white/10">
+            <p className="text-xs text-neon-red font-mono font-black uppercase mb-2">&gt; CLASSE ATRIBUÍDA</p>
+            <p className="text-2xl font-black text-white italic">{build.class}</p>
           </div>
 
-          <p className="text-xs text-neon-blue font-mono mt-4 pt-2">CONSELHO: {build.advice}</p>
+          <div className="text-gray-300 text-[15px] leading-relaxed border-y border-white/10 py-8 italic">
+            "{build.description}"
+          </div>
+
+          <div className="bg-black/70 p-5 rounded border-l-4 border-white/30">
+            <p className="text-xs text-gray-500 font-mono uppercase mb-1">DESTINO FINAL:</p>
+            <p className="text-sm font-bold text-gray-200">{build.final_fate}</p>
+          </div>
+
+          <div className="p-5 rounded bg-neon-blue/5 border border-neon-blue/30">
+            <p className="text-xs text-neon-blue font-mono font-black uppercase mb-2">CONSELHO DO GROK:</p>
+            <p className="text-sm text-neon-blue italic">{build.advice}</p>
+          </div>
         </div>
       </div>
-      
-      <button 
-        onClick={reset} 
-        className="mt-8 bg-white/10 p-4 rounded text-white uppercase font-black hover:bg-white/20 transition-all w-full max-w-lg tracking-widest"
-      >
-        Tentar Novo Loss
-      </button>
+
+      <div className="flex flex-col sm:flex-row w-full max-w-lg gap-4 mt-10">
+        <button 
+          onClick={handleDownload}
+          className="flex-1 bg-white text-black font-black py-4 rounded hover:bg-neon-blue hover:text-white transition-all uppercase tracking-widest"
+        >
+          EXPORTAR MERDESTINO
+        </button>
+        <button 
+          onClick={reset}
+          className="flex-1 bg-white/10 text-white/70 font-black py-4 rounded hover:bg-white/20 hover:text-white transition-all uppercase tracking-widest"
+        >
+          NOVO LOSS
+        </button>
+      </div>
     </motion.div>
   );
 }
