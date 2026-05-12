@@ -2,9 +2,10 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "es2023",
-    "lib": ["ES2023", "DOM"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "esnext",
-    "types": ["vite/client"],
+    /* Adicionamos node para o backend e vite/client para o frontend */
+    "types": ["node", "vite/client"], 
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -21,5 +22,6 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  /* IMPORTANTE: Incluir a pasta api aqui para a Vercel conseguir compilar o backend */
+  "include": ["src", "api"] 
 }
