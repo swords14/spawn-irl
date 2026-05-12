@@ -57,17 +57,17 @@ export function StartScreen() {
       }
       setLoading(false);
     } else {
-      alert("Preencha pelo menos nome, idade, gênero e profissão. O resto é opcional, mas ajuda a zoar melhor.");
+      alert("Preencha pelo menos nome, idade, género e profissão. O resto é opcional, mas ajuda a zoar melhor.");
     }
   };
 
   if (loading) return <LoadingScreen message={LOADING_MESSAGES[loadingMsgIdx]} />;
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center min-h-[80vh] px-4">
-      <h1 className="text-6xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">SpawnIRL</h1>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-8">
+      <h1 className="text-6xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue text-center">SpawnIRL</h1>
+      
       <div className="glass-panel p-8 w-full max-w-md flex flex-col gap-4">
-        
         <input 
           className="bg-black/50 border border-white/20 p-3 rounded text-white font-mono outline-none focus:border-neon-green"
           placeholder="Seu nome..." 
@@ -82,12 +82,11 @@ export function StartScreen() {
             value={age} onChange={(e) => setAge(e.target.value)}
           />
           
-          {/* GÊNERO COM TODA A MERDA DE OPÇÕES */}
           <select 
             className="bg-black/50 border border-white/20 p-3 rounded text-white font-mono outline-none focus:border-neon-green w-2/3 appearance-none"
             value={gender} onChange={(e) => setGender(e.target.value)}
           >
-            <option value="" disabled>Escolhe teu gênero...</option>
+            <option value="" disabled>Escolha o género...</option>
             <option value="Homem">Homem</option>
             <option value="Mulher">Mulher</option>
             <option value="Não-binário">Não-binário</option>
@@ -147,10 +146,23 @@ export function StartScreen() {
           <option value="Rico mas infeliz">Rico mas infeliz</option>
         </select>
 
-        <button onClick={handleStart} className="bg-neon-green text-black font-black py-4 mt-4 rounded uppercase hover:scale-[1.02] transition-all">
+        <button onClick={handleStart} className="bg-neon-green text-black font-black py-4 mt-4 rounded uppercase hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(0,255,0,0.2)]">
           Iniciar Humilhação
         </button>
       </div>
+
+      {/* RODAPÉ DO DEV HUMILDE */}
+      <div className="mt-8 text-center pb-8">
+        <a 
+          href="https://ko-fi.com/zed964288" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-white/30 hover:text-neon-green transition-colors text-xs font-mono tracking-widest uppercase"
+        >
+          ☕ Pagar um café pro dev não vazar os seus dados
+        </a>
+      </div>
+
     </motion.div>
   );
 }

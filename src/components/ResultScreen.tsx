@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 
 export function ResultScreen() {
-  // 1. Puxando TODAS as variáveis novas do Zustand
   const { 
     userName, userAge, userGender, userJob, 
     userCity, userMarital, userSalary, 
@@ -19,7 +18,6 @@ export function ResultScreen() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 2. Montando o objeto EXATAMENTE como a interface UserProfile exige
     const userProfile = { 
       name: userName, 
       age: userAge, 
@@ -30,7 +28,6 @@ export function ResultScreen() {
       salaryLevel: userSalary
     };
 
-    // 3. Enviando o perfil completo para a API
     generateBuildWithAI(userTags, userProfile).then(data => {
       setBuild(data);
       setLoading(false);
@@ -48,6 +45,14 @@ export function ResultScreen() {
       link.download = `MERDESTINO_${userName.toUpperCase()}.png`;
       link.click();
     }
+  };
+
+  // ==========================================
+  // O GOLPE DO KO-FI SÁDICO
+  // ==========================================
+  const handleSadisticDonation = () => {
+    alert("HAHAHA! Você realmente achou que R$ 5 ia limpar seu nome no Serasa ou te fazer Alpha? O laudo é eterno.\n\nMas valeu pela moral, o dev agradece o café!");
+    window.open("https://ko-fi.com/zed964288", "_blank");
   };
 
   if (loading) return <LoadingScreen message="Calculando seu prejuízo..." />;
@@ -116,19 +121,31 @@ export function ResultScreen() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row w-full max-w-lg gap-4 mt-10">
+      <div className="flex flex-col w-full max-w-lg gap-4 mt-10">
+        
+        {/* BOTÃO DE SUBORNO (KO-FI) */}
         <button 
-          onClick={handleDownload}
-          className="flex-1 bg-white text-black font-black py-4 rounded hover:bg-neon-blue hover:text-white transition-all uppercase tracking-widest"
+          onClick={handleSadisticDonation}
+          className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black py-4 rounded hover:scale-[1.02] transition-all uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.4)]"
         >
-          EXPORTAR MERDESTINO
+          💰 PAGAR R$ 5 PARA LIMPAR SEU LAUDO
         </button>
-        <button 
-          onClick={reset}
-          className="flex-1 bg-white/10 text-white/70 font-black py-4 rounded hover:bg-white/20 hover:text-white transition-all uppercase tracking-widest"
-        >
-          NOVO LOSS
-        </button>
+
+        {/* BOTÕES PADRÃO */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button 
+            onClick={handleDownload}
+            className="flex-1 bg-white text-black font-black py-4 rounded hover:bg-neon-blue hover:text-white transition-all uppercase tracking-widest"
+          >
+            EXPORTAR MERDESTINO
+          </button>
+          <button 
+            onClick={reset}
+            className="flex-1 bg-white/10 text-white/70 font-black py-4 rounded hover:bg-white/20 hover:text-white transition-all uppercase tracking-widest"
+          >
+            NOVO LOSS
+          </button>
+        </div>
       </div>
     </motion.div>
   );
