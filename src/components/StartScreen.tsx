@@ -61,6 +61,11 @@ export function StartScreen() {
     }
   };
 
+  const handlePixCopy = () => {
+    navigator.clipboard.writeText("88ec5b77-409a-4e80-8190-70ded1519825");
+    alert("Chave Pix (Itaú) copiada para a área de transferência: 88ec5b77-409a-4e80-8190-70ded1519825\n\nO dev agradece a força para manter o servidor rodando!");
+  };
+
   if (loading) return <LoadingScreen message={LOADING_MESSAGES[loadingMsgIdx]} />;
 
   return (
@@ -152,15 +157,21 @@ export function StartScreen() {
       </div>
 
       {/* RODAPÉ DO DEV HUMILDE */}
-      <div className="mt-8 text-center pb-8">
+      <div className="mt-8 text-center pb-8 flex flex-col items-center gap-3">
         <a 
           href="https://ko-fi.com/zed964288" 
           target="_blank" 
           rel="noopener noreferrer"
           className="text-white/30 hover:text-neon-green transition-colors text-xs font-mono tracking-widest uppercase"
         >
-          ☕ Pagar um café pro dev não vazar os seus dados
+          ☕ Pagar um café no Ko-fi
         </a>
+        <button 
+          onClick={handlePixCopy}
+          className="text-white/30 hover:text-teal-400 transition-colors text-xs font-mono tracking-widest uppercase"
+        >
+          💠 Ou mandar um Pix direto (Copiar Chave)
+        </button>
       </div>
 
     </motion.div>

@@ -1,4 +1,3 @@
-// src/components/ResultScreen.tsx
 import { useEffect, useState, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { generateBuildWithAI } from '../utils/engine';
@@ -47,12 +46,14 @@ export function ResultScreen() {
     }
   };
 
-  // ==========================================
-  // O GOLPE DO KO-FI SÁDICO
-  // ==========================================
-  const handleSadisticDonation = () => {
-    alert("HAHAHA! Você realmente achou que R$ 5 ia limpar seu nome no Serasa ou te fazer Alpha? O laudo é eterno.\n\nMas valeu pela moral, o dev agradece o café!");
+  const handleSadisticDonationKofi = () => {
+    alert("HAHAHA! Você realmente achou que pagar ia limpar seu nome no Serasa ou te fazer Alpha? O laudo é eterno.\n\nMas valeu pela moral, o dev agradece o café!");
     window.open("https://ko-fi.com/zed964288", "_blank");
+  };
+
+  const handlePixCopy = () => {
+    navigator.clipboard.writeText("88ec5b77-409a-4e80-8190-70ded1519825");
+    alert("Chave Pix (Itaú) copiada: 88ec5b77-409a-4e80-8190-70ded1519825\n\nHAHAHA! Você colou a chave, mas o seu laudo de beta continua intacto. De qualquer forma, o dev agradece a gelada!");
   };
 
   if (loading) return <LoadingScreen message="Calculando seu prejuízo..." />;
@@ -123,16 +124,8 @@ export function ResultScreen() {
 
       <div className="flex flex-col w-full max-w-lg gap-4 mt-10">
         
-        {/* BOTÃO DE SUBORNO (KO-FI) */}
-        <button 
-          onClick={handleSadisticDonation}
-          className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black py-4 rounded hover:scale-[1.02] transition-all uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.4)]"
-        >
-          💰 PAGAR R$ 5 PARA LIMPAR SEU LAUDO
-        </button>
-
         {/* BOTÕES PADRÃO */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-4">
           <button 
             onClick={handleDownload}
             className="flex-1 bg-white text-black font-black py-4 rounded hover:bg-neon-blue hover:text-white transition-all uppercase tracking-widest"
@@ -146,6 +139,28 @@ export function ResultScreen() {
             NOVO LOSS
           </button>
         </div>
+
+        <div className="text-center font-mono text-white/50 text-xs mb-2 uppercase tracking-widest">
+          💸 Pagar R$ 5 para limpar seu laudo
+        </div>
+
+        {/* BOTÕES DE SUBORNO */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button 
+            onClick={handleSadisticDonationKofi}
+            className="flex-1 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black py-3 rounded hover:scale-[1.02] transition-all uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.3)]"
+          >
+            ☕ VIA KO-FI
+          </button>
+          
+          <button 
+            onClick={handlePixCopy}
+            className="flex-1 bg-gradient-to-r from-teal-400 to-teal-500 text-black font-black py-3 rounded hover:scale-[1.02] transition-all uppercase tracking-widest shadow-[0_0_15px_rgba(45,212,191,0.3)]"
+          >
+            💠 VIA PIX (COPIAR)
+          </button>
+        </div>
+
       </div>
     </motion.div>
   );
