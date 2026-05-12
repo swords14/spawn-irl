@@ -1,5 +1,5 @@
 // api/quests.ts
-import { getQuestsPrompt } from '../src/utils/prompts';
+import { getQuestsPrompt } from './prompts';
 
 export default async function handler(req: any, res: any) {
   // 1. Bloqueia qualquer tentativa que não seja um envio de dados (POST)
