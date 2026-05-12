@@ -1,5 +1,5 @@
 // api/build.ts
-import { getBuildPrompt } from './prompts';
+import { getBuildPrompt } from './prompts.js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
